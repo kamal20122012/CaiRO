@@ -5,7 +5,6 @@ export interface TripFormData {
     departureDate: string;
     arrivalDate: string;
     activities: string[];
-    duration: number;
     beenBefore: boolean;
   }
   

@@ -19,16 +19,20 @@ export const TravelCard: React.FC<TravelCardProps> = ({ type, data }) => {
         
         <div className="travel-card__main">
           <div className="flight-route">
-            <span className="flight-time">{flight.departureTime}</span>
-            <span className="flight-location">{flight.source}</span>
+            <div className="flight-endpoint">
+              <span className="flight-time">{flight.departureTime}</span>
+              <span className="flight-location">{flight.source}</span>
+            </div>
             <span className="flight-arrow">→</span>
-            <span className="flight-time">{flight.arrivalTime}</span>
-            <span className="flight-location">{flight.destination}</span>
+            <div className="flight-endpoint">
+              <span className="flight-time">{flight.arrivalTime}</span>
+              <span className="flight-location">{flight.destination}</span>
+            </div>
           </div>
         </div>
 
         <div className="travel-card__footer">
-          <span className="travel-card__price">₹{flight.price}</span>
+          <span className="travel-card__price">{flight.price}</span>
         </div>
       </div>
     );

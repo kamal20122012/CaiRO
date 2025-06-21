@@ -24,7 +24,6 @@ export const TripForm: React.FC = () => {
     departureDate: '',
     arrivalDate: '',
     activities: [],
-    duration: 3,
     beenBefore: false
   });
 
@@ -53,7 +52,7 @@ export const TripForm: React.FC = () => {
         destination: formData.destination,
         departureDate: formData.departureDate,
         arrivalDate: formData.arrivalDate,
-        days: formData.duration,
+        days: calculateDurationInDays(formData.departureDate, formData.arrivalDate),
         trip_theme: formData.vibe,
         user_mood: extractMood(formData.vibe),
         vibe_keywords: extractKeywords(formData.vibe),
@@ -63,7 +62,9 @@ export const TripForm: React.FC = () => {
       };
 
       navigate('/itinerary', { 
-        state: { tripFormData: tripOutput }
+        state: { tripFormData: tripOutput,
+          from: 'tripForm'
+         }
       });
     } catch (err) {
       console.error('Form submission error:', err);
@@ -81,10 +82,16 @@ export const TripForm: React.FC = () => {
       departureDate: '',
       arrivalDate: '',
       activities: [],
-      duration: 3,
       beenBefore: false
     });
     setError('');
+  };
+
+  const calculateDurationInDays = (startDate: string, endDate: string): number => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const diffTime = Math.abs(end.getTime() - start.getTime());
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // +1 to include both start and end days
   };
 
   const extractMood = (vibe: string): string => {
@@ -186,22 +193,6 @@ export const TripForm: React.FC = () => {
               </label>
             ))}
           </div>
-        </div>
-
-        <div className="trip-form__field">
-          <label htmlFor="duration">Trip duration (days):</label>
-          <div className="trip-form__slider-container">
-            <input
-              type="range"
-              id="duration"
-              min="1"
-              max="10"
-              value={formData.duration}
-              onChange={(e) => setFormData(prev => ({ ...prev, duration: parseInt(e.target.value) }))}
-              className="trip-form__slider"
-            />
-          </div>
-          <span className="trip-form__duration-display">{formData.duration} days</span>
         </div>
 
         <div className="trip-form__field">

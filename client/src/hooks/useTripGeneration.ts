@@ -261,6 +261,51 @@ export const useTripGeneration = (tripFormData: TripFormOutput) => {
     generateAll();
   }, [memoizedTripFormData]);
 
+  const updateItinerary = async (userRequest: string): Promise<ItineraryData> => {
+    console.log('🔄 [TRIP GENERATION] Starting itinerary update with request:', userRequest);
+    
+    setState(prev => ({
+      ...prev,
+      loadingStates: { ...prev.loadingStates, dailyItinerary: true },
+      error: null
+    }));
+  
+    try {
+      const travelService = TravelService.getInstance();
+      const startTime = performance.now();
+      
+      const updatedItinerary = await travelService.updateItinerary(userRequest);
+      
+      const endTime = performance.now();
+      console.log('✅ [TRIP GENERATION] Itinerary update successful:', {
+        processingTime: `${(endTime - startTime).toFixed(2)}ms`,
+        updatedItinerary
+      });
+  
+      setState(prev => ({
+        ...prev,
+        itinerary: updatedItinerary,
+        loadingStates: { ...prev.loadingStates, dailyItinerary: false }
+      }));
+  
+      return updatedItinerary; // Return the updated itinerary
+    } catch (err) {
+      const errorTime = performance.now();
+      console.error('❌ [TRIP GENERATION] Itinerary update failed:', {
+        error: err,
+        errorMessage: err instanceof Error ? err.message : 'Unknown error'
+      });
+  
+      setState(prev => ({
+        ...prev,
+        error: 'Failed to update itinerary',
+        loadingStates: { ...prev.loadingStates, dailyItinerary: false }
+      }));
+  
+      throw err; // Throw error to be handled by the editor
+    }
+  };
+
   // Log state changes for debugging
   useEffect(() => {
     console.log('📊 [TRIP GENERATION] State updated:', {
@@ -274,6 +319,7 @@ export const useTripGeneration = (tripFormData: TripFormOutput) => {
   }, [state]);
 
   return {
-    ...state
+    ...state,
+    updateItinerary
   };
 };

@@ -189,6 +189,42 @@ export class TravelService {
     }
   }
 
+  async updateItinerary(userRequest: string): Promise<ItineraryData> {
+    console.log('🔄 [ITINERARY API] Requesting itinerary update with:', {
+      userRequest
+    });
+    
+    const startTime = performance.now();
+    
+    try {
+      const response = await this.apiClient.getAxiosInstance().post('/itinerary/update', {
+        user_request: userRequest
+      });
+      
+      const endTime = performance.now();
+      console.log('✅ [ITINERARY API] Update response received:', {
+        status: response.status,
+        duration: `${(endTime - startTime).toFixed(2)}ms`,
+        rawResponse: response.data
+      });
+      
+      const updatedItinerary = response.data?.data || response.data;
+      
+      if (!this.validateItineraryData(updatedItinerary)) {
+        throw new Error('Invalid itinerary data received');
+      }
+      
+      return updatedItinerary;
+    } catch (error) {
+      const endTime = performance.now();
+      console.error('❌ [ITINERARY API] Update request failed:', {
+        duration: `${(endTime - startTime).toFixed(2)}ms`,
+        error: error
+      });
+      throw error;
+    }
+  }
+
   // Validation helper methods
   private validateFlightData(data: any): boolean {
     return !!(data?.name && data?.price && data?.departureTime && data?.arrivalTime && data?.source && data?.destination);
