@@ -72,7 +72,7 @@ class TripFormOutput(BaseModel):
 
 # Pydantic model for update request body
 class UpdateItineraryRequest(BaseModel):
-    user_query: str
+    user_request: str
 
 # Root endpoint
 @app.get("/")
@@ -142,17 +142,17 @@ async def create_itinerary_endpoint(request: TripFormOutput):
 @app.post("/api/itinerary/update")
 async def update_itinerary_endpoint(request: UpdateItineraryRequest):
     """
-    Update an existing itinerary based on user query.
+    Update an existing itinerary based on user request.
     
     Args:
-        UpdateItineraryRequest: Request containing user's update query
+        UpdateItineraryRequest: Request containing user's update request
     
     Returns:
         JSON response with the updated itinerary
     """
     try:
-        logging.info(f"{Colors.ITINERARY_API_PREFIX} {Colors.CYAN}🔄 Updating itinerary based on user query{Colors.RESET}")
-        logging.info(f"{Colors.ITINERARY_API_PREFIX} {Colors.BLUE}📝 Update query: {request.user_query}{Colors.RESET}")
+        logging.info(f"{Colors.ITINERARY_API_PREFIX} {Colors.CYAN}🔄 Updating itinerary based on user request{Colors.RESET}")
+        logging.info(f"{Colors.ITINERARY_API_PREFIX} {Colors.BLUE}📝 Update request: {request.user_request}{Colors.RESET}")
         
         # Load the latest saved itinerary
         file_path = os.path.join("saved_itineraries", "latest_itinerary.json")
@@ -176,7 +176,7 @@ async def update_itinerary_endpoint(request: UpdateItineraryRequest):
         # Call the update function
         result = update_itinerary(
             itinerary_json=itinerary_json_str,
-            user_query=request.user_query,
+            user_query=request.user_request,
             model="gemini-2.0-flash"
         )
         
