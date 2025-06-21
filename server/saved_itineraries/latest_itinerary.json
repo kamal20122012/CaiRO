@@ -1,0 +1,222 @@
+{
+  "metadata": {
+    "destination": "Goa",
+    "source": "Mumbai",
+    "departure_date": "2024-02-15",
+    "arrival_date": "2024-02-19",
+    "days": 4,
+    "trip_theme": "Beach and Relaxation",
+    "user_mood": "Chill",
+    "vibe_keywords": [
+      "beach",
+      "sunset",
+      "seafood"
+    ],
+    "activities": [
+      "water sports",
+      "beach hopping",
+      "local cuisine"
+    ],
+    "avoid": [
+      "crowded places",
+      "expensive restaurants"
+    ],
+    "been_here_before": false
+  },
+  "itinerary": {
+    "title": "Goa: Optimized Chill Beach Hopper's Budget Backpacking Itinerary",
+    "overview": "A relaxed 4-day exploration of Goa's beaches and local culture, focusing on authentic experiences, delicious street food, and minimizing costs by optimizing locations to reduce travel time. This itinerary avoids crowded tourist traps in favour of hidden gems and a slow pace.",
+    "days": [
+      {
+        "day": 1,
+        "title": "South Goa: Palolem & Agonda Relaxation",
+        "narrative": "Arrive in South Goa and head straight to Palolem. Settle in, grab some breakfast, and spend the day exploring Palolem and nearby Agonda Beach. Consolidating to nearby beaches reduces travel time on day one.",
+        "activities": [
+          {
+            "time": "9:00 AM",
+            "name": "Breakfast at Palolem Beach Shack",
+            "location": "Palolem Beach",
+            "description": "Find a shack serving local Goan breakfast - Pao Bhaji, or Samosa. Enjoy the sea view."
+          },
+          {
+            "time": "10:00 AM",
+            "name": "Relax & Swim at Palolem Beach",
+            "location": "Palolem Beach",
+            "description": "Soak up the sun, swim in the calm waters, and enjoy the peaceful atmosphere."
+          },
+          {
+            "time": "1:00 PM",
+            "name": "Lunch at Palolem",
+            "location": "Palolem",
+            "description": "Find cheap local thali places at Palolem"
+          },
+          {
+            "time": "3:00 PM",
+            "name": "Agonda Beach Visit",
+            "location": "Agonda Beach",
+            "description": "Agonda Beach exploration. Quiet and serene, perfect for sunset."
+          },
+          {
+            "time": "5:00 PM",
+            "name": "Sunset Drinks",
+            "location": "Agonda Beach",
+            "description": "Kingfisher beer at a beach shack while enjoying the sunset."
+          },
+          {
+            "time": "7:30 PM",
+            "name": "Dinner at Agonda",
+            "location": "Near Agonda Market",
+            "description": "Goan Fish Thali, seafood curries."
+          },
+          {
+            "time": "9:00 PM",
+            "name": "Chill Evening",
+            "location": "Agonda/Palolem",
+            "description": "Relax at the beach or your accommodation."
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "title": "South Goa: Exploring Cavelossim & Nearby Beaches",
+        "narrative": "Focus on the beaches closer to Cavelossim to avoid long commutes. This allows for a more relaxed exploration of the Southern coastline.",
+        "activities": [
+          {
+            "time": "9:00 AM",
+            "name": "Breakfast Near Cavelossim",
+            "location": "Local Cafe near Cavelossim",
+            "description": "Goan snacks and chai."
+          },
+          {
+            "time": "10:00 AM",
+            "name": "Cavelossim/Mabor Beach - Watersports",
+            "location": "Cavelossim/Mabor Beach",
+            "description": "Clean sands, parasailing and jet skiing options available."
+          },
+          {
+            "time": "1:00 PM",
+            "name": "Lunch near Cavelossim",
+            "location": "Cavelossim Beach",
+            "description": "Beachside cafe, seafood curry."
+          },
+          {
+            "time": "3:00 PM",
+            "name": "Varca Beach",
+            "location": "Varca Beach",
+            "description": "Just north of Cavelossim, walk or short ride."
+          },
+          {
+            "time": "5:00 PM",
+            "name": "Explore Local Shops at Varca",
+            "location": "Near Varca",
+            "description": "Handicrafts, clothes."
+          },
+          {
+            "time": "7:30 PM",
+            "name": "Dinner Cavelossim",
+            "location": "Near Cavelossim Market",
+            "description": "Authentic Goan."
+          },
+          {
+            "time": "9:00 PM",
+            "name": "Relaxed Evening",
+            "location": "Accommodation",
+            "description": "Relax at your accommodation"
+          }
+        ]
+      },
+      {
+        "day": 3,
+        "title": "Dudhsagar Falls & Spice Plantation",
+        "narrative": "A day trip to Dudhsagar Falls, one of India's tallest waterfalls and a visit to a local spice plantation.",
+        "activities": [
+          {
+            "time": "8:00 AM",
+            "name": "Dudhsagar Falls Trip",
+            "location": "Dudhsagar Falls",
+            "description": "Early start for the trip to Dudhsagar Falls. Jeep safari to the falls base (arrange tour in advance)."
+          },
+          {
+            "time": "1:00 PM",
+            "name": "Lunch at Spice Plantation",
+            "location": "Near Dudhsagar Falls",
+            "description": "Traditional Goan lunch at a Spice Plantation."
+          },
+          {
+            "time": "2:30 PM",
+            "name": "Spice Plantation Tour",
+            "location": "Spice Plantation",
+            "description": "Guided tour of the spice plantation, learning about local spices."
+          },
+          {
+            "time": "5:00 PM",
+            "name": "Travel back to North Goa",
+            "location": "Anjuna/Vagator",
+            "description": "Travel back"
+          },
+          {
+            "time": "7:30 PM",
+            "name": "Dinner at Curlies",
+            "location": "Anjuna",
+            "description": "Authentic goan cuisines."
+          },
+          {
+            "time": "9:00 PM",
+            "name": "Live music at For the Record",
+            "location": "Anjuna",
+            "description": "Good music and friendly vibes."
+          }
+        ]
+      },
+      {
+        "day": 4,
+        "title": "Arambol Beach - Final Relaxation & Departure",
+        "narrative": "Focus solely on Arambol on the last day to ensure a relaxed departure.",
+        "activities": [
+          {
+            "time": "9:00 AM",
+            "name": "Breakfast at German Bakery",
+            "location": "Arambol",
+            "description": "German bakery view."
+          },
+          {
+            "time": "10:00 AM",
+            "name": "Arambol Beach Relaxation",
+            "location": "Arambol Beach",
+            "description": "Beach chilling."
+          },
+          {
+            "time": "1:00 PM",
+            "name": "Lunch at Local Shack",
+            "location": "Arambol Beach",
+            "description": "Beach shack lunch."
+          },
+          {
+            "time": "3:00 PM",
+            "name": "Sweet Lake walk",
+            "location": "Sweet Lake",
+            "description": "Freshwater."
+          },
+          {
+            "time": "5:00 PM",
+            "name": "Arambol Sunset",
+            "location": "Arambol Beach",
+            "description": "Final sunset."
+          },
+          {
+            "time": "7:30 PM",
+            "name": "Dinner in Arambol",
+            "location": "Arambol Market",
+            "description": "final dinner"
+          },
+          {
+            "time": "9:00 PM",
+            "name": "Departure",
+            "location": "Thivim Railway Station/Dabolim Airport",
+            "description": "Go home"
+          }
+        ]
+      }
+    ]
+  }
+}
