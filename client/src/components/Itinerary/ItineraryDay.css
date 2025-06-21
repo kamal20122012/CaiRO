@@ -1,0 +1,50 @@
+.itinerary-day {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.itinerary-day__header {
+  margin-bottom: 2.5rem;
+}
+
+.itinerary-day__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.itinerary-day__narrative {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  color: #5d6d7e;
+  line-height: 1.6;
+  max-width: 800px;
+}
+
+.itinerary-day__activities {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 1000px; /* Limit maximum width for better readability */
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .itinerary-day {
+    padding: 1.5rem;
+  }
+  
+  .itinerary-day__title {
+    font-size: 2rem;
+  }
+
+  .itinerary-day__narrative {
+    font-size: 1.1rem;
+  }
+}

@@ -1,0 +1,84 @@
+.travel-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .travel-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .travel-card__header {
+    margin-bottom: 1rem;
+  }
+  
+  .travel-card__name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: #2c3e50;
+  }
+  
+  .travel-card__time {
+    display: inline-block;
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .travel-card__main {
+    margin-bottom: 1rem;
+  }
+  
+  .flight-route {
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+  }
+  
+  .flight-time {
+    font-weight: 500;
+    color: #2c3e50;
+  }
+  
+  .flight-location {
+    color: #64748b;
+  }
+  
+  .flight-arrow {
+    color: #8b5cf6;
+    font-size: 1.25rem;
+  }
+  
+  .hotel-rating {
+    color: #f59e0b;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hotel-dates {
+    color: #64748b;
+    margin-bottom: 0.5rem;
+  }
+  
+  .hotel-location {
+    color: #8b5cf6;
+  }
+  
+  .travel-card__footer {
+    border-top: 1px solid #f1f5f9;
+    padding-top: 1rem;
+    text-align: right;
+  }
+  
+  .travel-card__price {
+    font-weight: 600;
+    color: #10b981;
+    font-size: 1.125rem;
+  }
