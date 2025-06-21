@@ -1,0 +1,62 @@
+.action-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 140px;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    0 8px 30px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.action-button__icon {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #8b5cf6;
+  transition: transform 0.3s ease;
+}
+
+.action-button:hover .action-button__icon {
+  transform: scale(1.1);
+}
+
+.action-button__label {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #2c3e50;
+  letter-spacing: -0.01em;
+}
+
+/* Variant-specific styles */
+.action-button--primary {
+  background: rgba(139, 92, 246, 0.1);
+}
+
+.action-button--secondary {
+  background: rgba(236, 72, 153, 0.1);
+}
+
+.action-button--tertiary {
+  background: rgba(45, 212, 191, 0.1);
+}
+
+.action-button--quaternary {
+  background: rgba(234, 179, 8, 0.1);
+}

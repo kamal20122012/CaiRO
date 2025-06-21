@@ -1,0 +1,321 @@
+.trip-form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  position: relative;
+}
+
+/* Add a subtle background pattern */
+.trip-form::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(139, 92, 246, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.trip-form__container {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 3rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add subtle animated gradient border */
+.trip-form__container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    rgba(139, 92, 246, 0.2),
+    rgba(236, 72, 153, 0.2),
+    rgba(45, 212, 191, 0.2)
+  );
+  border-radius: 24px;
+  z-index: -1;
+  animation: borderGradient 8s linear infinite;
+}
+
+.trip-form__title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--color-text);
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.trip-form__field,
+.trip-form__source {
+  margin-bottom: 2rem;
+}
+
+.trip-form__field label,
+.trip-form__source label,
+.trip-form__date-input label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: var(--color-text);
+  font-weight: 500;
+  font-size: 1.1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+.trip-form__input,
+.trip-form__textarea,
+.trip-form__source .trip-form__input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid rgba(139, 92, 246, 0.1);
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+}
+
+.trip-form__textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.trip-form__input:focus,
+.trip-form__textarea:focus,
+.trip-form__source .trip-form__input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: white;
+  box-shadow: 
+    0 0 0 4px rgba(139, 92, 246, 0.1),
+    0 4px 12px rgba(139, 92, 246, 0.05);
+  transform: translateY(-1px);
+}
+
+.trip-form__input::placeholder,
+.trip-form__textarea::placeholder {
+  color: #94a3b8;
+}
+
+.trip-form__activities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  padding: 0.5rem;
+}
+
+
+.trip-form__checkbox-label {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background: rgba(139, 92, 246, 0.03);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 1px solid rgba(139, 92, 246, 0.1);
+  box-sizing: border-box;
+}
+
+.trip-form__checkbox-label:hover {
+  background: rgba(139, 92, 246, 0.08);
+  transform: translateY(-1px);
+}
+
+.trip-form__checkbox-label input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+}
+
+.trip-form__dates {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.trip-form__date-input input[type="date"] {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid rgba(139, 92, 246, 0.1);
+  border-radius: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.trip-form__date-input input[type="date"]:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: white;
+  box-shadow: 
+    0 0 0 4px rgba(139, 92, 246, 0.1),
+    0 4px 12px rgba(139, 92, 246, 0.05);
+  transform: translateY(-1px);
+}
+
+/* Add subtle hover effect to inputs */
+.trip-form__input:hover,
+.trip-form__textarea:hover,
+.trip-form__date-input input:hover {
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+.trip-form__slider-container {
+  padding: 1rem 0.5rem;
+}
+
+.trip-form__slider {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(139, 92, 246, 0.1);
+  border-radius: 3px;
+  outline: none;
+}
+
+.trip-form__slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.trip-form__slider::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.trip-form__duration-display {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.trip-form__actions {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+.trip-form__error {
+  color: #ef4444;
+  margin: 1rem 0;
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  border-radius: 12px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.trip-form__loading {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.trip-form__loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(139, 92, 246, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--color-primary);
+  animation: spin 1s linear infinite;
+  margin: 0 auto 1rem;
+}
+
+.trip-form__output {
+  margin-top: 2.5rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.trip-form__output h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-text);
+}
+
+.trip-form__output pre {
+  background: rgba(0, 0, 0, 0.02);
+  padding: 1.5rem;
+  border-radius: 12px;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Been here before checkbox specific styling */
+.trip-form__field .trip-form__checkbox-label:last-child {
+  width: fit-content;
+  margin-top: 0.5rem;
+}
+
+/* Animations */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes borderGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .trip-form__container {
+    padding: 2rem;
+  }
+
+  .trip-form__dates {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-form__activities {
+    grid-template-columns: 1fr;
+  }
+
+  .trip-form__actions {
+    grid-template-columns: 1fr;
+  }
+}

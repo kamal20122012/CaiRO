@@ -1,0 +1,121 @@
+.activity-card {
+  display: flex;
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  height: 225px;
+}
+
+.activity-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 12px 20px rgba(0, 0, 0, 0.1),
+    0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.activity-card__image-container {
+  flex: 0 0 40%;
+  position: relative;
+  overflow: hidden;
+}
+
+.activity-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.activity-card__content {
+  flex: 0 0 60%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.activity-card__main-info {
+  flex-grow: 1;
+}
+
+.activity-card__time {
+  display: inline-block;
+  background: rgba(139, 92, 246, 0.1);
+  color: #8b5cf6;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.activity-card__name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 0.75rem;
+}
+
+.activity-card__location {
+  display: inline-flex;
+  align-items: center;
+  color: #8b5cf6;
+  text-decoration: none;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  transition: color 0.2s ease;
+}
+
+.activity-card__location:hover {
+  color: #7c3aed;
+  text-decoration: underline;
+}
+
+.activity-card__description {
+  color: #5d6d7e;
+  line-height: 1.6;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.activity-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: auto;
+  justify-content: center;
+}
+
+.activity-card__tag {
+  background: rgba(236, 72, 153, 0.1);
+  color: #ec4899;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .activity-card {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .activity-card__image-container {
+    flex: 0 0 150px;
+  }
+
+  .activity-card__content {
+    flex: 1;
+  }
+
+  .activity-card__name {
+    font-size: 1.5rem;
+  }
+}

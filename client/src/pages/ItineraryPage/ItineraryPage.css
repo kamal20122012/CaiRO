@@ -1,0 +1,47 @@
+.itinerary-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f3f7 0%, #fff5f2 100%);
+    padding: 2rem;
+  }
+  
+  .itinerary-page__header {
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    text-align: center;
+  }
+  
+  .itinerary-page__title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    color: #2c3e50;
+    margin: 2rem 0 1rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  
+  .itinerary-page__overview {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.25rem;
+    color: #5d6d7e;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  
+  .itinerary-page__days {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  @media (max-width: 768px) {
+    .itinerary-page {
+      padding: 1rem;
+    }
+    
+    .itinerary-page__title {
+      font-size: 2rem;
+    }
+  }
