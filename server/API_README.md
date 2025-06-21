@@ -30,27 +30,34 @@ Or directly:
 python main.py
 ```
 
-The server will be available at `http://localhost:8000`
+The server will be available at `http://localhost:3001`
 
 ## API Documentation
 
-- Swagger UI: `http://localhost:8000/docs`
-- ReDoc: `http://localhost:8000/redoc`
+- Swagger UI: `http://localhost:3001/docs`
+- ReDoc: `http://localhost:3001/redoc`
 
 ## Endpoints
 
 ### 1. Create Itinerary
-**POST** `/itinerary`
+**POST** `/api/itinerary/generate`
 
 Create an optimized travel itinerary for a given city.
 
 **Request Body:**
 ```json
 {
-  "city_name": "Paris",
-  "user_pref": "I love museums, art galleries, and good food. I prefer walking over long bus rides.",
-  "n_days": 3,
-  "model": "gemini-2.0-flash"
+  "source": "New Delhi",
+  "destination": "Paris",
+  "departureDate": "2025-06-15",
+  "arrivalDate": "2025-06-20",
+  "days": 5,
+  "trip_theme": "Cultural and Historical",
+  "user_mood": "Relaxed",
+  "vibe_keywords": ["art", "museums", "cafes"],
+  "activities": ["museums", "art galleries", "walking tours"],
+  "avoid": ["crowded places", "long bus rides"],
+  "been_here_before": false
 }
 ```
 
@@ -58,7 +65,7 @@ Create an optimized travel itinerary for a given city.
 ```json
 {
   "status": "success",
-  "itinerary": {
+  "data": {
     "day_1": [...],
     "day_2": [...],
     "day_3": [...]
@@ -67,18 +74,24 @@ Create an optimized travel itinerary for a given city.
 ```
 
 ### 2. Search Flights
-**POST** `/flights/search`
+**POST** `/api/flights/generate`
 
 Search for flight information using grounded search.
 
 **Request Body:**
 ```json
 {
-  "source": "bangalore",
-  "destination": "mumbai",
-  "date": "27 June 2025",
-  "airlines": ["indigo", "air india", "vistara"],
-  "model": "gemini-2.5-pro"
+  "source": "New Delhi",
+  "destination": "Mumbai",
+  "departureDate": "2025-06-27",
+  "arrivalDate": "2025-06-30",
+  "days": 3,
+  "trip_theme": "Business",
+  "user_mood": "Efficient",
+  "vibe_keywords": ["quick", "comfortable"],
+  "activities": ["business meetings"],
+  "avoid": ["delays"],
+  "been_here_before": true
 }
 ```
 
@@ -86,7 +99,7 @@ Search for flight information using grounded search.
 ```json
 {
   "status": "success",
-  "flights": {
+  "data": {
     "indigo": {
       "06:25": "₹4500",
       "14:30": "₹4200"
@@ -99,19 +112,24 @@ Search for flight information using grounded search.
 ```
 
 ### 3. Search Hotels
-**POST** `/hotels/search`
+**POST** `/api/hotels/generate`
 
 Search for hotel information using grounded search.
 
 **Request Body:**
 ```json
 {
-  "city": "bangalore",
-  "check_in_date": "24 Jun 2025",
-  "check_out_date": "29 Jun 2025",
-  "price_min": 1000,
-  "price_max": 2000,
-  "model": "gemini-2.5-pro"
+  "source": "New Delhi",
+  "destination": "Bangalore",
+  "departureDate": "2025-06-24",
+  "arrivalDate": "2025-06-29",
+  "days": 5,
+  "trip_theme": "Leisure",
+  "user_mood": "Adventurous",
+  "vibe_keywords": ["comfortable", "modern"],
+  "activities": ["sightseeing", "local food"],
+  "avoid": ["noisy areas"],
+  "been_here_before": false
 }
 ```
 
@@ -119,20 +137,12 @@ Search for hotel information using grounded search.
 ```json
 {
   "status": "success",
-  "hotels": [
-    {
-      "name": "Hotel Sigma Suites",
-      "price_per_night": "1283",
-      "rating": "4.2",
-      "location": "Gandhi Nagar, Bangalore"
-    },
-    {
-      "name": "Magaji Residency",
-      "price_per_night": "1046",
-      "rating": "3.9",
-      "location": "Jayanagar, Bangalore"
-    }
-  ]
+  "data": {
+    "name": "Hotel Sigma Suites",
+    "price_per_night": "1283",
+    "rating": "4.2",
+    "location": "Gandhi Nagar, Bangalore"
+  }
 }
 ```
 
@@ -149,43 +159,99 @@ Check if the API is running.
 }
 ```
 
+### 5. Root Endpoint
+**GET** `/`
+
+Get API information and available endpoints.
+
+**Response:**
+```json
+{
+  "message": "Welcome to CaiRO Travel API",
+  "endpoints": {
+    "generate_itinerary": "/api/itinerary/generate",
+    "generate_flights": "/api/flights/generate", 
+    "generate_hotels": "/api/hotels/generate"
+  }
+}
+```
+
 ## Example Usage with curl
 
 ### Create Itinerary
 ```bash
-curl -X POST "http://localhost:8000/itinerary" \
+curl -X POST "http://localhost:3001/api/itinerary/generate" \
      -H "Content-Type: application/json" \
      -d '{
-       "city_name": "Tokyo",
-       "user_pref": "I love technology, anime culture, and traditional Japanese food",
-       "n_days": 5
+       "source": "Mumbai",
+       "destination": "Tokyo",
+       "departureDate": "2025-07-15",
+       "arrivalDate": "2025-07-20",
+       "days": 5,
+       "trip_theme": "Cultural Exploration",
+       "user_mood": "Curious",
+       "vibe_keywords": ["technology", "anime", "traditional"],
+       "activities": ["museums", "temples", "food tours"],
+       "avoid": ["crowded trains during rush hour"],
+       "been_here_before": false
      }'
 ```
 
 ### Search Flights
 ```bash
-curl -X POST "http://localhost:8000/flights/search" \
+curl -X POST "http://localhost:3001/api/flights/generate" \
      -H "Content-Type: application/json" \
      -d '{
-       "source": "delhi",
-       "destination": "goa",
-       "date": "15 July 2025",
-       "airlines": ["indigo", "spicejet", "air india"]
+       "source": "Delhi",
+       "destination": "Goa",
+       "departureDate": "2025-07-15",
+       "arrivalDate": "2025-07-18",
+       "days": 3,
+       "trip_theme": "Beach Vacation",
+       "user_mood": "Relaxed",
+       "vibe_keywords": ["beach", "sun", "relaxation"],
+       "activities": ["beach activities", "water sports"],
+       "avoid": ["early morning flights"],
+       "been_here_before": false
      }'
 ```
 
 ### Search Hotels
 ```bash
-curl -X POST "http://localhost:8000/hotels/search" \
+curl -X POST "http://localhost:3001/api/hotels/generate" \
      -H "Content-Type: application/json" \
      -d '{
-       "city": "goa",
-       "check_in_date": "15 Jul 2025",
-       "check_out_date": "18 Jul 2025",
-       "price_min": 2000,
-       "price_max": 5000
+       "source": "Mumbai",
+       "destination": "Goa",
+       "departureDate": "2025-07-15",
+       "arrivalDate": "2025-07-18",
+       "days": 3,
+       "trip_theme": "Beach Vacation",
+       "user_mood": "Relaxed",
+       "vibe_keywords": ["beachfront", "comfortable"],
+       "activities": ["beach activities", "spa"],
+       "avoid": ["noisy locations"],
+       "been_here_before": false
      }'
 ```
+
+## Request Body Schema
+
+All endpoints use the unified `TripFormOutput` schema:
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `source` | string | Departure city/location |
+| `destination` | string | Destination city/location |
+| `departureDate` | string | Departure date (YYYY-MM-DD format) |
+| `arrivalDate` | string | Return/checkout date (YYYY-MM-DD format) |
+| `days` | integer | Number of days for the trip |
+| `trip_theme` | string | Theme of the trip (e.g., "Cultural", "Adventure", "Business") |
+| `user_mood` | string | User's mood/preference (e.g., "Relaxed", "Adventurous") |
+| `vibe_keywords` | array of strings | Keywords describing desired vibe |
+| `activities` | array of strings | Preferred activities |
+| `avoid` | array of strings | Things to avoid |
+| `been_here_before` | boolean | Whether user has visited the destination before |
 
 ## Environment Variables
 

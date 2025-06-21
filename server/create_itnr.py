@@ -7,6 +7,26 @@ from google.genai import types
 from prompt_lib import itnr_1, itnr_2, itnr_3
 from llm_utils import get_conversation_response_gemini, add_user_message_to_conversation
 
+# ANSI Color codes for colored logging
+class Colors:
+    RESET = '\033[0m'
+    BOLD = '\033[1m'
+    
+    # Background colors for method identification
+    ITINERARY_BG = '\033[45m'   # Magenta background
+    
+    # Text colors
+    RED = '\033[91m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    BLUE = '\033[94m'
+    MAGENTA = '\033[95m'
+    CYAN = '\033[96m'
+    WHITE = '\033[97m'
+    
+    # Method-specific prefix
+    ITINERARY_PREFIX = f'{ITINERARY_BG}{WHITE}{BOLD} 🗺️  ITINERARY {RESET}'
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -56,23 +76,23 @@ def create_itinerary(city_name: str, user_pref: str, n_days: int, model: str = "
     start_time = time.time()
     api_call_times = []
     
-    logging.info(f"🚀 Starting itinerary creation for {city_name} ({n_days} days)")
-    logging.info(f"📋 User preferences: {user_pref}")
-    logging.info(f"🤖 Using model: {model}")
+    logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🚀 Starting itinerary creation for {city_name} ({n_days} days){Colors.RESET}")
+    logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}📋 User preferences: {user_pref}{Colors.RESET}")
+    logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.MAGENTA}🤖 Using model: {model}{Colors.RESET}")
     
     try:
         # Format the first prompt with city name
         prompt_1 = itnr_1.format(city_name=city_name)
-        logging.info("📝 Step 1/3: Formatted first prompt for attractions categorization")
-        logging.debug(f"🔍 Prompt 1 content: {prompt_1}")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}📝 Step 1/3: Formatted first prompt for attractions categorization{Colors.RESET}")
+        logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Prompt 1 content: {prompt_1}{Colors.RESET}")
         
         # Start conversation with first prompt
-        logging.info("🔄 Adding first prompt to conversation history...")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}🔄 Adding first prompt to conversation history...{Colors.RESET}")
         conversation_history = add_user_message_to_conversation([], prompt_1)
-        logging.debug(f"🔍 Conversation history length after adding prompt 1: {len(conversation_history)}")
+        logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Conversation history length after adding prompt 1: {len(conversation_history)}{Colors.RESET}")
         
         # Generate response for first prompt (attractions categorization)
-        logging.info("🔄 Making API call 1/3: Getting attractions categorization...")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}🔄 Making API call 1/3: Getting attractions categorization...{Colors.RESET}")
         api_call_1_start = time.time()
         try:
             response_1_text, conversation_history = get_conversation_response_gemini(
@@ -84,34 +104,34 @@ def create_itinerary(city_name: str, user_pref: str, n_days: int, model: str = "
             api_call_1_duration = api_call_1_end - api_call_1_start
             api_call_times.append(("API Call 1 (Attractions categorization)", api_call_1_duration))
             
-            logging.info("✅ Step 1/3 completed: Received attractions categorization")
-            logging.info(f"⏱️ API Call 1 duration: {api_call_1_duration:.2f} seconds")
-            logging.info(f"📊 Response 1 length: {len(response_1_text)} characters")
-            logging.debug(f"🔍 Response 1 content: {response_1_text}")
-            logging.debug(f"🔍 Conversation history length after response 1: {len(conversation_history)}")
+            logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.GREEN}✅ Step 1/3 completed: Received attractions categorization{Colors.RESET}")
+            logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}⏱️ API Call 1 duration: {api_call_1_duration:.2f} seconds{Colors.RESET}")
+            logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}📊 Response 1 length: {len(response_1_text)} characters{Colors.RESET}")
+            logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Response 1 content: {response_1_text}{Colors.RESET}")
+            logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Conversation history length after response 1: {len(conversation_history)}{Colors.RESET}")
                 
         except Exception as e:
             api_call_1_end = time.time()
             api_call_1_duration = api_call_1_end - api_call_1_start
             api_call_times.append(("API Call 1 (Failed)", api_call_1_duration))
             
-            logging.error(f"❌ Error in API call 1/3: {e}")
-            logging.error(f"⏱️ API Call 1 failed after: {api_call_1_duration:.2f} seconds")
-            logging.error(f"🔍 Error type: {type(e).__name__}")
-            logging.error(f"🔍 Error details: {str(e)}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}❌ Error in API call 1/3: {e}{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}⏱️ API Call 1 failed after: {api_call_1_duration:.2f} seconds{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔍 Error type: {type(e).__name__}{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔍 Error details: {str(e)}{Colors.RESET}")
             raise
         
         # Format and add second prompt with user preferences and number of days
         prompt_2 = itnr_2.format(user_pref=user_pref, n_days=n_days)
-        logging.info("📝 Step 2/3: Formatted second prompt for initial itinerary creation")
-        logging.debug(f"🔍 Prompt 2 content: {prompt_2}")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}📝 Step 2/3: Formatted second prompt for initial itinerary creation{Colors.RESET}")
+        logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Prompt 2 content: {prompt_2}{Colors.RESET}")
         
-        logging.info("🔄 Adding second prompt to conversation history...")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}🔄 Adding second prompt to conversation history...{Colors.RESET}")
         conversation_history = add_user_message_to_conversation(conversation_history, prompt_2)
-        logging.debug(f"🔍 Conversation history length after adding prompt 2: {len(conversation_history)}")
+        logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Conversation history length after adding prompt 2: {len(conversation_history)}{Colors.RESET}")
         
         # Generate response for second prompt (initial itinerary)
-        logging.info("🔄 Making API call 2/3: Creating initial itinerary...")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}🔄 Making API call 2/3: Creating initial itinerary...{Colors.RESET}")
         api_call_2_start = time.time()
         try:
             response_2_text, conversation_history = get_conversation_response_gemini(
@@ -123,33 +143,33 @@ def create_itinerary(city_name: str, user_pref: str, n_days: int, model: str = "
             api_call_2_duration = api_call_2_end - api_call_2_start
             api_call_times.append(("API Call 2 (Initial itinerary)", api_call_2_duration))
             
-            logging.info("✅ Step 2/3 completed: Received initial itinerary")
-            logging.info(f"⏱️ API Call 2 duration: {api_call_2_duration:.2f} seconds")
-            logging.info(f"📊 Response 2 length: {len(response_2_text)} characters")
-            logging.debug(f"🔍 Response 2 content: {response_2_text}")
-            logging.debug(f"🔍 Conversation history length after response 2: {len(conversation_history)}")
+            logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.GREEN}✅ Step 2/3 completed: Received initial itinerary{Colors.RESET}")
+            logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}⏱️ API Call 2 duration: {api_call_2_duration:.2f} seconds{Colors.RESET}")
+            logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}📊 Response 2 length: {len(response_2_text)} characters{Colors.RESET}")
+            logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Response 2 content: {response_2_text}{Colors.RESET}")
+            logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Conversation history length after response 2: {len(conversation_history)}{Colors.RESET}")
                 
         except Exception as e:
             api_call_2_end = time.time()
             api_call_2_duration = api_call_2_end - api_call_2_start
             api_call_times.append(("API Call 2 (Failed)", api_call_2_duration))
             
-            logging.error(f"❌ Error in API call 2/3: {e}")
-            logging.error(f"⏱️ API Call 2 failed after: {api_call_2_duration:.2f} seconds")
-            logging.error(f"🔍 Error type: {type(e).__name__}")
-            logging.error(f"🔍 Error details: {str(e)}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}❌ Error in API call 2/3: {e}{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}⏱️ API Call 2 failed after: {api_call_2_duration:.2f} seconds{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔍 Error type: {type(e).__name__}{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔍 Error details: {str(e)}{Colors.RESET}")
             raise
         
         # Add third prompt for optimization
-        logging.info("📝 Step 3/3: Added third prompt for location-based optimization")
-        logging.debug(f"🔍 Prompt 3 content: {itnr_3}")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}📝 Step 3/3: Added third prompt for location-based optimization{Colors.RESET}")
+        logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Prompt 3 content: {itnr_3}{Colors.RESET}")
         
-        logging.info("🔄 Adding third prompt to conversation history...")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}🔄 Adding third prompt to conversation history...{Colors.RESET}")
         conversation_history = add_user_message_to_conversation(conversation_history, itnr_3)
-        logging.debug(f"🔍 Conversation history length after adding prompt 3: {len(conversation_history)}")
+        logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Conversation history length after adding prompt 3: {len(conversation_history)}{Colors.RESET}")
         
         # Generate final optimized response
-        logging.info("🔄 Making API call 3/3: Optimizing itinerary based on locations...")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}🔄 Making API call 3/3: Optimizing itinerary based on locations...{Colors.RESET}")
         api_call_3_start = time.time()
         try:
             response_3_text, conversation_history = get_conversation_response_gemini(
@@ -161,23 +181,23 @@ def create_itinerary(city_name: str, user_pref: str, n_days: int, model: str = "
             api_call_3_duration = api_call_3_end - api_call_3_start
             api_call_times.append(("API Call 3 (Optimization)", api_call_3_duration))
             
-            logging.info("✅ Step 3/3 completed: Received final optimized itinerary")
-            logging.info(f"⏱️ API Call 3 duration: {api_call_3_duration:.2f} seconds")
-            logging.info(f"📊 Response 3 length: {len(response_3_text)} characters")
-            logging.debug(f"🔍 Response 3 content: {response_3_text}")
-            logging.debug(f"🔍 Final conversation history length: {len(conversation_history)}")
+            logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.GREEN}✅ Step 3/3 completed: Received final optimized itinerary{Colors.RESET}")
+            logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}⏱️ API Call 3 duration: {api_call_3_duration:.2f} seconds{Colors.RESET}")
+            logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}📊 Response 3 length: {len(response_3_text)} characters{Colors.RESET}")
+            logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Response 3 content: {response_3_text}{Colors.RESET}")
+            logging.debug(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🔍 Final conversation history length: {len(conversation_history)}{Colors.RESET}")
             
             # Extract JSON from final response (handle ```json code blocks)
             final_json = extract_json_from_response(response_3_text)
-            logging.info("🔧 Extracted JSON from final response")
+            logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}🔧 Extracted JSON from final response{Colors.RESET}")
             
             # Try to validate final JSON
             try:
                 json.loads(final_json)
-                logging.info("✅ Final response is valid JSON")
+                logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.GREEN}✅ Final response is valid JSON{Colors.RESET}")
             except json.JSONDecodeError as e:
-                logging.warning(f"⚠️ Final response is not valid JSON: {e}")
-                logging.warning(f"🔍 Final response raw text: {repr(final_json)}")
+                logging.warning(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}⚠️ Final response is not valid JSON: {e}{Colors.RESET}")
+                logging.warning(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}🔍 Final response raw text: {repr(final_json)}{Colors.RESET}")
                 # Return the extracted content anyway, it might still be useful
                 
         except Exception as e:
@@ -185,10 +205,10 @@ def create_itinerary(city_name: str, user_pref: str, n_days: int, model: str = "
             api_call_3_duration = api_call_3_end - api_call_3_start
             api_call_times.append(("API Call 3 (Failed)", api_call_3_duration))
             
-            logging.error(f"❌ Error in API call 3/3: {e}")
-            logging.error(f"⏱️ API Call 3 failed after: {api_call_3_duration:.2f} seconds")
-            logging.error(f"🔍 Error type: {type(e).__name__}")
-            logging.error(f"🔍 Error details: {str(e)}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}❌ Error in API call 3/3: {e}{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}⏱️ API Call 3 failed after: {api_call_3_duration:.2f} seconds{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔍 Error type: {type(e).__name__}{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔍 Error details: {str(e)}{Colors.RESET}")
             raise
         
         # Calculate total time and log summary
@@ -196,20 +216,20 @@ def create_itinerary(city_name: str, user_pref: str, n_days: int, model: str = "
         total_duration = end_time - start_time
         total_api_time = sum(duration for _, duration in api_call_times)
         
-        logging.info("🎉 Itinerary creation process completed successfully!")
-        logging.info("=" * 60)
-        logging.info("📊 TIMING SUMMARY")
-        logging.info("=" * 60)
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.GREEN}🎉 Itinerary creation process completed successfully!{Colors.RESET}")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}{'=' * 60}{Colors.RESET}")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}📊 TIMING SUMMARY{Colors.RESET}")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}{'=' * 60}{Colors.RESET}")
         
         for call_name, duration in api_call_times:
             percentage = (duration / total_api_time) * 100 if total_api_time > 0 else 0
-            logging.info(f"⏱️ {call_name}: {duration:.2f}s ({percentage:.1f}%)")
+            logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}⏱️ {call_name}: {duration:.2f}s ({percentage:.1f}%){Colors.RESET}")
         
-        logging.info("-" * 60)
-        logging.info(f"🔄 Total API call time: {total_api_time:.2f}s")
-        logging.info(f"⏱️ Total execution time: {total_duration:.2f}s")
-        logging.info(f"📈 API efficiency: {(total_api_time/total_duration)*100:.1f}% (API time / total time)")
-        logging.info("=" * 60)
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}{'-' * 60}{Colors.RESET}")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.GREEN}🔄 Total API call time: {total_api_time:.2f}s{Colors.RESET}")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.GREEN}⏱️ Total execution time: {total_duration:.2f}s{Colors.RESET}")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.GREEN}📈 API efficiency: {(total_api_time/total_duration)*100:.1f}% (API time / total time){Colors.RESET}")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}{'=' * 60}{Colors.RESET}")
         
         return final_json
         
@@ -219,25 +239,25 @@ def create_itinerary(city_name: str, user_pref: str, n_days: int, model: str = "
         total_duration = end_time - start_time
         total_api_time = sum(duration for _, duration in api_call_times)
         
-        logging.error(f"❌ Critical error in create_itinerary function: {e}")
-        logging.error(f"🔍 Error type: {type(e).__name__}")
-        logging.error(f"🔍 Error details: {str(e)}")
-        logging.error(f"🔍 Error repr: {repr(e)}")
+        logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}❌ Critical error in create_itinerary function: {e}{Colors.RESET}")
+        logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔍 Error type: {type(e).__name__}{Colors.RESET}")
+        logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔍 Error details: {str(e)}{Colors.RESET}")
+        logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔍 Error repr: {repr(e)}{Colors.RESET}")
         
         # Log timing summary even on error
         if api_call_times:
-            logging.error("=" * 60)
-            logging.error("📊 TIMING SUMMARY (FAILED EXECUTION)")
-            logging.error("=" * 60)
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}{'=' * 60}{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}📊 TIMING SUMMARY (FAILED EXECUTION){Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}{'=' * 60}{Colors.RESET}")
             
             for call_name, duration in api_call_times:
                 percentage = (duration / total_api_time) * 100 if total_api_time > 0 else 0
-                logging.error(f"⏱️ {call_name}: {duration:.2f}s ({percentage:.1f}%)")
+                logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}⏱️ {call_name}: {duration:.2f}s ({percentage:.1f}%){Colors.RESET}")
             
-            logging.error("-" * 60)
-            logging.error(f"🔄 Total API call time: {total_api_time:.2f}s")
-            logging.error(f"⏱️ Total execution time: {total_duration:.2f}s")
-            logging.error("=" * 60)
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}{'-' * 60}{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔄 Total API call time: {total_api_time:.2f}s{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}⏱️ Total execution time: {total_duration:.2f}s{Colors.RESET}")
+            logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}{'=' * 60}{Colors.RESET}")
         
         raise
 
@@ -253,13 +273,13 @@ def create_itinerary_with_test_case(test_case_index: int = 0, model: str = "gemi
     Returns:
         str: Final optimized itinerary in JSON format
     """
-    logging.info(f"🧪 Loading test case {test_case_index}")
+    logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.MAGENTA}🧪 Loading test case {test_case_index}{Colors.RESET}")
     
     try:
         from test_cases import get_test_case
         
         test_case = get_test_case(test_case_index)
-        logging.info(f"🧪 Test case loaded: {test_case}")
+        logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.MAGENTA}🧪 Test case loaded: {test_case}{Colors.RESET}")
         
         return create_itinerary(
             city_name=test_case["city_name"],
@@ -268,9 +288,9 @@ def create_itinerary_with_test_case(test_case_index: int = 0, model: str = "gemi
             model=model
         )
     except Exception as e:
-        logging.error(f"❌ Error in create_itinerary_with_test_case: {e}")
-        logging.error(f"🔍 Error type: {type(e).__name__}")
-        logging.error(f"🔍 Error details: {str(e)}")
+        logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}❌ Error in create_itinerary_with_test_case: {e}{Colors.RESET}")
+        logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔍 Error type: {type(e).__name__}{Colors.RESET}")
+        logging.error(f"{Colors.ITINERARY_PREFIX} {Colors.RED}🔍 Error details: {str(e)}{Colors.RESET}")
         raise
 
 

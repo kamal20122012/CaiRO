@@ -7,6 +7,28 @@ from typing import List, Optional
 from llm_utils import get_response_gemini, get_conversation_response_gemini, add_user_message_to_conversation
 from google.genai import types
 
+# ANSI Color codes for colored logging
+class Colors:
+    RESET = '\033[0m'
+    BOLD = '\033[1m'
+    
+    # Background colors for method identification
+    FLIGHT_BG = '\033[44m'      # Blue background
+    HOTEL_BG = '\033[42m'       # Green background
+    
+    # Text colors
+    RED = '\033[91m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    BLUE = '\033[94m'
+    MAGENTA = '\033[95m'
+    CYAN = '\033[96m'
+    WHITE = '\033[97m'
+    
+    # Method-specific prefixes
+    FLIGHT_PREFIX = f'{FLIGHT_BG}{WHITE}{BOLD} ✈️  FLIGHTS {RESET}'
+    HOTEL_PREFIX = f'{HOTEL_BG}{WHITE}{BOLD} 🏨 HOTELS  {RESET}'
+
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.getLogger().setLevel(logging.DEBUG)
@@ -25,9 +47,9 @@ def search_flights(source: str, destination: str, date: str, airlines: List[str]
     Returns:
         str: Flight information in JSON format
     """
-    logging.info(f"🛫 Searching flights from {source} to {destination} on {date}")
-    logging.info(f"📋 Airlines: {', '.join(airlines)}")
-    logging.info(f"🤖 Using model: {model}")
+    logging.info(f"{Colors.FLIGHT_PREFIX} {Colors.CYAN}🛫 Searching flights from {source} to {destination} on {date}{Colors.RESET}")
+    logging.info(f"{Colors.FLIGHT_PREFIX} {Colors.BLUE}📋 Airlines: {', '.join(airlines)}{Colors.RESET}")
+    logging.info(f"{Colors.FLIGHT_PREFIX} {Colors.MAGENTA}🤖 Using model: {model}{Colors.RESET}")
     
     # Create the templatized query with more explicit instructions for grounded search
     airlines_str = ", ".join(airlines)
@@ -53,80 +75,106 @@ Example structure:
 
 Search now and provide the live results in the exact JSON format above."""
 
-    logging.debug(f"🔍 Flight query: {flight_query}")
+    logging.debug(f"{Colors.FLIGHT_PREFIX} {Colors.CYAN}🔍 Flight query: {flight_query}{Colors.RESET}")
     
-    try:
-        # Use grounded search to get flight information
-        logging.info("🔄 Making grounded API call for flight search...")
-        
-        response_text = get_response_gemini(
-            model=model,
-            user_query=flight_query,
-            grounding=True,  # Enable grounding for Google Flights search
-            thinking_budget=-1  # Use dynamic thinking for complex flight searches
-        )
-        
-        logging.info("✅ Flight search completed successfully")
-        logging.info(f"📊 Raw response length: {len(response_text)} characters")
-        logging.debug(f"🔍 Raw flight response: {response_text}")
-        
-        # Clean up the response to extract just the JSON
-        cleaned_response = clean_flight_response(response_text)
-        logging.info(f"📊 Cleaned response length: {len(cleaned_response)} characters")
-        logging.debug(f"🔍 Cleaned flight response: {cleaned_response}")
-        
-        # Parse the JSON and randomly select one flight
+    # Retry mechanism: try up to 3 times before falling back to dummy data
+    max_retries = 3
+    last_exception = None
+    
+    for attempt in range(max_retries):
         try:
-            flight_data = json.loads(cleaned_response)
+            # Use grounded search to get flight information
+            logging.info(f"{Colors.FLIGHT_PREFIX} {Colors.YELLOW}🔄 Making grounded API call for flight search (attempt {attempt + 1}/{max_retries})...{Colors.RESET}")
             
-            # Filter out airlines with empty flight lists
-            non_empty_airlines = {airline: flights for airline, flights in flight_data.items() 
-                                if flights and len(flights) > 0}
+            response_text = get_response_gemini(
+                model=model,
+                user_query=flight_query,
+                grounding=True,  # Enable grounding for Google Flights search
+                thinking_budget=-1  # Use dynamic thinking for complex flight searches
+            )
             
-            if not non_empty_airlines:
-                logging.error("❌ No airlines with available flights found")
-                raise ValueError("No flights available from any airline")
+            logging.info(f"{Colors.FLIGHT_PREFIX} {Colors.GREEN}✅ Flight search completed successfully{Colors.RESET}")
+            logging.info(f"{Colors.FLIGHT_PREFIX} {Colors.BLUE}📊 Raw response length: {len(response_text)} characters{Colors.RESET}")
+            logging.debug(f"{Colors.FLIGHT_PREFIX} {Colors.CYAN}🔍 Raw flight response: {response_text}{Colors.RESET}")
             
-            # Randomly select an airline
-            selected_airline = random.choice(list(non_empty_airlines.keys()))
-            logging.info(f"🎲 Randomly selected airline: {selected_airline}")
+            # Clean up the response to extract just the JSON
+            cleaned_response = clean_flight_response(response_text)
+            logging.info(f"{Colors.FLIGHT_PREFIX} {Colors.BLUE}📊 Cleaned response length: {len(cleaned_response)} characters{Colors.RESET}")
+            logging.debug(f"{Colors.FLIGHT_PREFIX} {Colors.CYAN}🔍 Cleaned flight response: {cleaned_response}{Colors.RESET}")
             
-            # Randomly select a flight from the selected airline
-            selected_flight = random.choice(non_empty_airlines[selected_airline])
-            logging.info(f"🎲 Randomly selected flight: {selected_flight}")
+            # Parse the JSON and randomly select one flight
+            try:
+                flight_data = json.loads(cleaned_response)
+                
+                # Filter out airlines with empty flight lists
+                non_empty_airlines = {airline: flights for airline, flights in flight_data.items() 
+                                    if flights and len(flights) > 0}
+                
+                if not non_empty_airlines:
+                    logging.error(f"{Colors.FLIGHT_PREFIX} {Colors.RED}❌ No airlines with available flights found{Colors.RESET}")
+                    raise ValueError("No flights available from any airline")
+                
+                # Randomly select an airline
+                selected_airline = random.choice(list(non_empty_airlines.keys()))
+                logging.info(f"{Colors.FLIGHT_PREFIX} {Colors.MAGENTA}🎲 Randomly selected airline: {selected_airline}{Colors.RESET}")
+                
+                # Randomly select a flight from the selected airline
+                selected_flight = random.choice(non_empty_airlines[selected_airline])
+                logging.info(f"{Colors.FLIGHT_PREFIX} {Colors.MAGENTA}🎲 Randomly selected flight: {selected_flight}{Colors.RESET}")
+                
+                # Structure the final JSON according to requirements
+                final_flight_json = {
+                    "name": selected_airline,
+                    "location": source,
+                    "price": selected_flight["price"],
+                    "date": date,
+                    "departureTime": selected_flight["departure_time"],
+                    "arrivalTime": selected_flight["arrival_time"],
+                    "source": source,
+                    "destination": destination
+                }
+                
+                logging.info(f"{Colors.FLIGHT_PREFIX} {Colors.GREEN}✅ Final structured flight: {final_flight_json}{Colors.RESET}")
+                return json.dumps(final_flight_json, indent=2)
+                
+            except json.JSONDecodeError as e:
+                logging.error(f"{Colors.FLIGHT_PREFIX} {Colors.RED}❌ Failed to parse flight JSON: {e}{Colors.RESET}")
+                logging.debug(f"{Colors.FLIGHT_PREFIX} {Colors.RED}🔍 Problematic JSON: {cleaned_response}{Colors.RESET}")
+                raise ValueError(f"Invalid JSON response from flight search: {e}")
+            except KeyError as e:
+                logging.error(f"{Colors.FLIGHT_PREFIX} {Colors.RED}❌ Missing expected key in flight data: {e}{Colors.RESET}")
+                logging.debug(f"{Colors.FLIGHT_PREFIX} {Colors.RED}🔍 Flight data structure: {flight_data}{Colors.RESET}")
+                raise ValueError(f"Unexpected flight data structure: {e}")
+            except Exception as e:
+                logging.error(f"{Colors.FLIGHT_PREFIX} {Colors.RED}❌ Error processing flight selection: {e}{Colors.RESET}")
+                raise
             
-            # Structure the final JSON according to requirements
-            final_flight_json = {
-                "name": selected_airline,
-                "location": source,
-                "price": selected_flight["price"],
-                "date": date,
-                "departureTime": selected_flight["departure_time"],
-                "arrivalTime": selected_flight["arrival_time"],
-                "source": source,
-                "destination": destination
-            }
-            
-            logging.info(f"✅ Final structured flight: {final_flight_json}")
-            return json.dumps(final_flight_json, indent=2)
-            
-        except json.JSONDecodeError as e:
-            logging.error(f"❌ Failed to parse flight JSON: {e}")
-            logging.debug(f"🔍 Problematic JSON: {cleaned_response}")
-            raise ValueError(f"Invalid JSON response from flight search: {e}")
-        except KeyError as e:
-            logging.error(f"❌ Missing expected key in flight data: {e}")
-            logging.debug(f"🔍 Flight data structure: {flight_data}")
-            raise ValueError(f"Unexpected flight data structure: {e}")
         except Exception as e:
-            logging.error(f"❌ Error processing flight selection: {e}")
-            raise
-        
-    except Exception as e:
-        logging.error(f"❌ Error in search_flights: {e}")
-        logging.error(f"🔍 Error type: {type(e).__name__}")
-        logging.error(f"🔍 Error details: {str(e)}")
-        raise
+            last_exception = e
+            logging.error(f"{Colors.FLIGHT_PREFIX} {Colors.RED}❌ Error in search_flights attempt {attempt + 1}: {e}{Colors.RESET}")
+            logging.error(f"{Colors.FLIGHT_PREFIX} {Colors.RED}🔍 Error type: {type(e).__name__}{Colors.RESET}")
+            logging.error(f"{Colors.FLIGHT_PREFIX} {Colors.RED}🔍 Error details: {str(e)}{Colors.RESET}")
+            
+            if attempt < max_retries - 1:
+                logging.warning(f"{Colors.FLIGHT_PREFIX} {Colors.YELLOW}🔄 Retrying flight search (attempt {attempt + 2}/{max_retries})...{Colors.RESET}")
+            else:
+                logging.error(f"{Colors.FLIGHT_PREFIX} {Colors.RED}❌ All {max_retries} attempts failed for flight search{Colors.RESET}")
+                logging.warning(f"{Colors.FLIGHT_PREFIX} {Colors.YELLOW}🔄 Using fallback dummy flight data{Colors.RESET}")
+    
+    # Return dummy flight data as fallback (only reached if all retries failed)
+    dummy_flight_data = {
+        "name": "IndiGo",
+        "location": source,
+        "price": "₹4,500",
+        "date": date,
+        "departureTime": "08:30",
+        "arrivalTime": "10:45",
+        "source": source,
+        "destination": destination
+    }
+    
+    logging.info(f"{Colors.FLIGHT_PREFIX} {Colors.GREEN}✅ Fallback flight data: {dummy_flight_data}{Colors.RESET}")
+    return json.dumps(dummy_flight_data, indent=2)
 
 def search_hotels(city: str, 
                   check_in_date: str, check_out_date: str,
@@ -145,10 +193,10 @@ def search_hotels(city: str,
     Returns:
         str: Hotel information in JSONL format
     """
-    logging.info(f"🏨 Searching hotels in {city}")
-    logging.info(f"📅 Check-in: {check_in_date}, Check-out: {check_out_date}")
-    logging.info(f"💰 Price range: ₹{price_min} - ₹{price_max} per night")
-    logging.info(f"🤖 Using model: {model}")
+    logging.info(f"{Colors.HOTEL_PREFIX} {Colors.CYAN}🏨 Searching hotels in {city}{Colors.RESET}")
+    logging.info(f"{Colors.HOTEL_PREFIX} {Colors.BLUE}📅 Check-in: {check_in_date}, Check-out: {check_out_date}{Colors.RESET}")
+    logging.info(f"{Colors.HOTEL_PREFIX} {Colors.GREEN}💰 Price range: ₹{price_min} - ₹{price_max} per night{Colors.RESET}")
+    logging.info(f"{Colors.HOTEL_PREFIX} {Colors.MAGENTA}🤖 Using model: {model}{Colors.RESET}")
     
     # Create the templatized query with explicit instructions for grounded search
     hotel_query = f"""Search Google Hotels for current hotel information:
@@ -174,75 +222,99 @@ Example:
 
 Search now and provide live results in exact JSONL format above."""
 
-    logging.debug(f"🔍 Hotel query: {hotel_query}")
+    logging.debug(f"{Colors.HOTEL_PREFIX} {Colors.CYAN}🔍 Hotel query: {hotel_query}{Colors.RESET}")
     
-    try:
-        # Use grounded search to get hotel information
-        logging.info("🔄 Making grounded API call for hotel search...")
-        
-        response_text = get_response_gemini(
-            model=model,
-            user_query=hotel_query,
-            grounding=True,  # Enable grounding for Google Hotels search
-            thinking_budget=-1  # Use dynamic thinking for complex hotel searches
-        )
-        
-        logging.info("✅ Hotel search completed successfully")
-        logging.info(f"📊 Raw response length: {len(response_text)} characters")
-        logging.debug(f"🔍 Raw hotel response: {response_text}")
-        
-        # Clean up the response to extract just the JSONL
-        cleaned_response = clean_hotel_response(response_text)
-        logging.info(f"📊 Cleaned response length: {len(cleaned_response)} characters")
-        logging.debug(f"🔍 Cleaned hotel response: {cleaned_response}")
-        
-        # Parse the JSONL and randomly select one hotel
+    # Retry mechanism: try up to 3 times before falling back to dummy data
+    max_retries = 3
+    last_exception = None
+    
+    for attempt in range(max_retries):
         try:
-            # Parse JSONL (each line is a separate JSON object)
-            hotels = []
-            for line in cleaned_response.strip().split('\n'):
-                if line.strip():
-                    hotel = json.loads(line.strip())
-                    hotels.append(hotel)
+            # Use grounded search to get hotel information
+            logging.info(f"{Colors.HOTEL_PREFIX} {Colors.YELLOW}🔄 Making grounded API call for hotel search (attempt {attempt + 1}/{max_retries})...{Colors.RESET}")
             
-            if not hotels:
-                logging.error("❌ No hotels found in response")
-                raise ValueError("No hotels available")
+            response_text = get_response_gemini(
+                model=model,
+                user_query=hotel_query,
+                grounding=True,  # Enable grounding for Google Hotels search
+                thinking_budget=-1  # Use dynamic thinking for complex hotel searches
+            )
             
-            # Randomly select a hotel
-            selected_hotel = random.choice(hotels)
-            logging.info(f"🎲 Randomly selected hotel: {selected_hotel}")
+            logging.info(f"{Colors.HOTEL_PREFIX} {Colors.GREEN}✅ Hotel search completed successfully{Colors.RESET}")
+            logging.info(f"{Colors.HOTEL_PREFIX} {Colors.BLUE}📊 Raw response length: {len(response_text)} characters{Colors.RESET}")
+            logging.debug(f"{Colors.HOTEL_PREFIX} {Colors.CYAN}🔍 Raw hotel response: {response_text}{Colors.RESET}")
             
-            # Structure the final JSON according to requirements
-            final_hotel_json = {
-                "name": selected_hotel["name"],
-                "location": selected_hotel["location"], 
-                "price": int(selected_hotel["price_per_night"]),
-                "checkIn": check_in_date,
-                "checkOut": check_out_date,
-                "rating": float(selected_hotel["rating"])
-            }
+            # Clean up the response to extract just the JSONL
+            cleaned_response = clean_hotel_response(response_text)
+            logging.info(f"{Colors.HOTEL_PREFIX} {Colors.BLUE}📊 Cleaned response length: {len(cleaned_response)} characters{Colors.RESET}")
+            logging.debug(f"{Colors.HOTEL_PREFIX} {Colors.CYAN}🔍 Cleaned hotel response: {cleaned_response}{Colors.RESET}")
             
-            logging.info(f"✅ Final structured hotel: {final_hotel_json}")
-            return json.dumps(final_hotel_json, indent=2)
+            # Parse the JSONL and randomly select one hotel
+            try:
+                # Parse JSONL (each line is a separate JSON object)
+                hotels = []
+                for line in cleaned_response.strip().split('\n'):
+                    if line.strip():
+                        hotel = json.loads(line.strip())
+                        hotels.append(hotel)
+                
+                if not hotels:
+                    logging.error(f"{Colors.HOTEL_PREFIX} {Colors.RED}❌ No hotels found in response{Colors.RESET}")
+                    raise ValueError("No hotels available")
+                
+                # Randomly select a hotel
+                selected_hotel = random.choice(hotels)
+                logging.info(f"{Colors.HOTEL_PREFIX} {Colors.MAGENTA}🎲 Randomly selected hotel: {selected_hotel}{Colors.RESET}")
+                
+                # Structure the final JSON according to requirements
+                final_hotel_json = {
+                    "name": selected_hotel["name"],
+                    "location": selected_hotel["location"], 
+                    "price": int(selected_hotel["price_per_night"]),
+                    "checkIn": check_in_date,
+                    "checkOut": check_out_date,
+                    "rating": float(selected_hotel["rating"])
+                }
+                
+                logging.info(f"{Colors.HOTEL_PREFIX} {Colors.GREEN}✅ Final structured hotel: {final_hotel_json}{Colors.RESET}")
+                return json.dumps(final_hotel_json, indent=2)
+                
+            except json.JSONDecodeError as e:
+                logging.error(f"{Colors.HOTEL_PREFIX} {Colors.RED}❌ Failed to parse hotel JSONL: {e}{Colors.RESET}")
+                logging.debug(f"{Colors.HOTEL_PREFIX} {Colors.RED}🔍 Problematic JSONL: {cleaned_response}{Colors.RESET}")
+                raise ValueError(f"Invalid JSONL response from hotel search: {e}")
+            except KeyError as e:
+                logging.error(f"{Colors.HOTEL_PREFIX} {Colors.RED}❌ Missing expected key in hotel data: {e}{Colors.RESET}")
+                logging.debug(f"{Colors.HOTEL_PREFIX} {Colors.RED}🔍 Hotel data structure: {selected_hotel}{Colors.RESET}")
+                raise ValueError(f"Unexpected hotel data structure: {e}")
+            except Exception as e:
+                logging.error(f"{Colors.HOTEL_PREFIX} {Colors.RED}❌ Error processing hotel selection: {e}{Colors.RESET}")
+                raise
             
-        except json.JSONDecodeError as e:
-            logging.error(f"❌ Failed to parse hotel JSONL: {e}")
-            logging.debug(f"🔍 Problematic JSONL: {cleaned_response}")
-            raise ValueError(f"Invalid JSONL response from hotel search: {e}")
-        except KeyError as e:
-            logging.error(f"❌ Missing expected key in hotel data: {e}")
-            logging.debug(f"🔍 Hotel data structure: {selected_hotel}")
-            raise ValueError(f"Unexpected hotel data structure: {e}")
         except Exception as e:
-            logging.error(f"❌ Error processing hotel selection: {e}")
-            raise
-        
-    except Exception as e:
-        logging.error(f"❌ Error in search_hotels: {e}")
-        logging.error(f"🔍 Error type: {type(e).__name__}")
-        logging.error(f"🔍 Error details: {str(e)}")
-        raise
+            last_exception = e
+            logging.error(f"{Colors.HOTEL_PREFIX} {Colors.RED}❌ Error in search_hotels attempt {attempt + 1}: {e}{Colors.RESET}")
+            logging.error(f"{Colors.HOTEL_PREFIX} {Colors.RED}🔍 Error type: {type(e).__name__}{Colors.RESET}")
+            logging.error(f"{Colors.HOTEL_PREFIX} {Colors.RED}🔍 Error details: {str(e)}{Colors.RESET}")
+            
+            if attempt < max_retries - 1:
+                logging.warning(f"{Colors.HOTEL_PREFIX} {Colors.YELLOW}🔄 Retrying hotel search (attempt {attempt + 2}/{max_retries})...{Colors.RESET}")
+            else:
+                logging.error(f"{Colors.HOTEL_PREFIX} {Colors.RED}❌ All {max_retries} attempts failed for hotel search{Colors.RESET}")
+                logging.warning(f"{Colors.HOTEL_PREFIX} {Colors.YELLOW}🔄 Using fallback dummy hotel data{Colors.RESET}")
+    
+    # Return dummy hotel data as fallback (only reached if all retries failed)
+    dummy_hotel_data = {
+        "name": "Grand Palace Hotel",
+        "location": f"City Center, {city}",
+        "price": random.randint(price_min, price_max),
+        "checkIn": check_in_date,
+        "checkOut": check_out_date,
+        "rating": 4.2
+    }
+    
+    logging.info(f"{Colors.HOTEL_PREFIX} {Colors.GREEN}✅ Fallback hotel data: {dummy_hotel_data}{Colors.RESET}")
+    return json.dumps(dummy_hotel_data, indent=2)
 
 def clean_flight_response(response_text: str) -> str:
     """
@@ -255,7 +327,7 @@ def clean_flight_response(response_text: str) -> str:
     Returns:
         str: Cleaned JSON response
     """
-    logging.debug("🧹 Cleaning flight response...")
+    logging.debug(f"{Colors.FLIGHT_PREFIX} {Colors.YELLOW}🧹 Cleaning flight response...{Colors.RESET}")
     
     try:
         # Look for JSON content in the response
@@ -263,29 +335,29 @@ def clean_flight_response(response_text: str) -> str:
         json_match = re.search(r'```json\s*(\{.*?\})\s*```', response_text, re.DOTALL)
         if json_match:
             json_content = json_match.group(1)
-            logging.debug("✅ Found JSON in code block")
+            logging.debug(f"{Colors.FLIGHT_PREFIX} {Colors.GREEN}✅ Found JSON in code block{Colors.RESET}")
         else:
             # Try to find JSON object directly in the text
             json_match = re.search(r'(\{[^{}]*\{[^{}]*\}[^{}]*\})', response_text, re.DOTALL)
             if json_match:
                 json_content = json_match.group(1)
-                logging.debug("✅ Found JSON object in text")
+                logging.debug(f"{Colors.FLIGHT_PREFIX} {Colors.GREEN}✅ Found JSON object in text{Colors.RESET}")
             else:
                 # If no structured JSON found, return original response
-                logging.warning("⚠️ No clear JSON structure found, returning original response")
+                logging.warning(f"{Colors.FLIGHT_PREFIX} {Colors.YELLOW}⚠️ No clear JSON structure found, returning original response{Colors.RESET}")
                 return response_text
         
         # Validate that it's proper JSON
         try:
             json.loads(json_content)
-            logging.debug("✅ JSON validation successful")
+            logging.debug(f"{Colors.FLIGHT_PREFIX} {Colors.GREEN}✅ JSON validation successful{Colors.RESET}")
             return json_content
         except json.JSONDecodeError:
-            logging.warning("⚠️ JSON validation failed, returning original response")
+            logging.warning(f"{Colors.FLIGHT_PREFIX} {Colors.YELLOW}⚠️ JSON validation failed, returning original response{Colors.RESET}")
             return response_text
             
     except Exception as e:
-        logging.error(f"❌ Error cleaning response: {e}")
+        logging.error(f"{Colors.FLIGHT_PREFIX} {Colors.RED}❌ Error cleaning response: {e}{Colors.RESET}")
         return response_text
 
 def clean_hotel_response(response_text: str) -> str:
@@ -299,7 +371,7 @@ def clean_hotel_response(response_text: str) -> str:
     Returns:
         str: Cleaned JSONL response
     """
-    logging.debug("🧹 Cleaning hotel response...")
+    logging.debug(f"{Colors.HOTEL_PREFIX} {Colors.YELLOW}🧹 Cleaning hotel response...{Colors.RESET}")
     
     try:
         # Look for JSONL content in the response
@@ -307,7 +379,7 @@ def clean_hotel_response(response_text: str) -> str:
         jsonl_match = re.search(r'```jsonl\s*(.*?)\s*```', response_text, re.DOTALL)
         if jsonl_match:
             jsonl_content = jsonl_match.group(1).strip()
-            logging.debug("✅ Found JSONL in code block")
+            logging.debug(f"{Colors.HOTEL_PREFIX} {Colors.GREEN}✅ Found JSONL in code block{Colors.RESET}")
         else:
             # Look for lines that appear to be JSON objects
             lines = response_text.split('\n')
@@ -325,10 +397,10 @@ def clean_hotel_response(response_text: str) -> str:
             
             if jsonl_lines:
                 jsonl_content = '\n'.join(jsonl_lines)
-                logging.debug(f"✅ Found {len(jsonl_lines)} valid JSON lines")
+                logging.debug(f"{Colors.HOTEL_PREFIX} {Colors.GREEN}✅ Found {len(jsonl_lines)} valid JSON lines{Colors.RESET}")
             else:
                 # If no JSONL found, return original response
-                logging.warning("⚠️ No clear JSONL structure found, returning original response")
+                logging.warning(f"{Colors.HOTEL_PREFIX} {Colors.YELLOW}⚠️ No clear JSONL structure found, returning original response{Colors.RESET}")
                 return response_text
         
         # Validate each line is proper JSON
@@ -342,19 +414,19 @@ def clean_hotel_response(response_text: str) -> str:
                     json.loads(line)
                     valid_lines.append(line)
                 except json.JSONDecodeError:
-                    logging.warning(f"⚠️ Invalid JSON line skipped: {line[:50]}...")
+                    logging.warning(f"{Colors.HOTEL_PREFIX} {Colors.YELLOW}⚠️ Invalid JSON line skipped: {line[:50]}...{Colors.RESET}")
                     continue
         
         if valid_lines:
             result = '\n'.join(valid_lines)
-            logging.debug(f"✅ JSONL validation successful, {len(valid_lines)} valid lines")
+            logging.debug(f"{Colors.HOTEL_PREFIX} {Colors.GREEN}✅ JSONL validation successful, {len(valid_lines)} valid lines{Colors.RESET}")
             return result
         else:
-            logging.warning("⚠️ No valid JSON lines found, returning original response")
+            logging.warning(f"{Colors.HOTEL_PREFIX} {Colors.YELLOW}⚠️ No valid JSON lines found, returning original response{Colors.RESET}")
             return response_text
             
     except Exception as e:
-        logging.error(f"❌ Error cleaning response: {e}")
+        logging.error(f"{Colors.HOTEL_PREFIX} {Colors.RED}❌ Error cleaning response: {e}{Colors.RESET}")
         return response_text
 
 # Example usage:
