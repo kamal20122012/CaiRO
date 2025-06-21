@@ -205,7 +205,7 @@ if __name__ == "__main__":
     # Generate response
     try:
         response = get_response_gemini(
-            model="gemini-2.0-flash",
+            model="gemini-2.5-pro",
             user_query=user_query,
             grounding=grounding,
             thinking_budget=thinking_budget
