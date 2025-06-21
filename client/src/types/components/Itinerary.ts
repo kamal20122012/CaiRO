@@ -40,8 +40,4 @@ interface BaseActivity {
     title: string;
     overview: string;
     days: DayPlan[];
-    travelArrangements: {
-      flights: Flight[];
-      hotels: Hotel[];
-    };
   }
