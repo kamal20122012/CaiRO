@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { ActionButton } from '@/components/ActionButton/ActionButton';
 import { ItineraryDay } from '@/components/Itinerary/ItineraryDay';
 import { TravelCard } from '@/components/Itinerary/TravelCard';
@@ -8,8 +8,15 @@ import { useTripGeneration } from '@/hooks/useTripGeneration';
 import { TripFormOutput } from '@/types/components/TripForm';
 import './ItineraryPage.css';
 
-export const ItineraryPage: React.FC<{ tripFormData: TripFormOutput }> = ({ tripFormData }) => {
+export const ItineraryPage: React.FC = () => {
+  const location = useLocation();
   const navigate = useNavigate();
+
+  if (!location.state?.tripFormData) {
+    return <Navigate to="/plan-trip" replace />;
+  }
+
+  const tripFormData = location.state.tripFormData as TripFormOutput;
   
   const {
     flight,

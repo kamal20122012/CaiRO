@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ActionButton } from '@/components/ActionButton/ActionButton';
-import { TripFormOutput } from '@/types/components/TripForm';
-import { TripFormData } from '@/types/components/TripForm';
+import { TripFormData, TripFormOutput } from '@/types/components/TripForm';
 import './TripForm.css';
 
 const ACTIVITIES = [
@@ -16,6 +16,7 @@ const ACTIVITIES = [
 ];
 
 export const TripForm: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<TripFormData>({
     vibe: '',
     source: '',
@@ -27,7 +28,6 @@ export const TripForm: React.FC = () => {
     beenBefore: false
   });
 
-  const [output, setOutput] = useState<TripFormOutput | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -47,9 +47,8 @@ export const TripForm: React.FC = () => {
 
     setLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      const generatedOutput: TripFormOutput = {
+    try {
+      const tripOutput: TripFormOutput = {
         source: formData.source,
         destination: formData.destination,
         departureDate: formData.departureDate,
@@ -63,9 +62,15 @@ export const TripForm: React.FC = () => {
         been_here_before: formData.beenBefore
       };
 
-      setOutput(generatedOutput);
+      navigate('/itinerary', { 
+        state: { tripFormData: tripOutput }
+      });
+    } catch (err) {
+      console.error('Form submission error:', err);
+      setError('Failed to process trip request');
+    } finally {
       setLoading(false);
-    }, 1500);
+    }
   };
 
   const handleReset = () => {
@@ -79,7 +84,6 @@ export const TripForm: React.FC = () => {
       duration: 3,
       beenBefore: false
     });
-    setOutput(null);
     setError('');
   };
 
@@ -217,7 +221,7 @@ export const TripForm: React.FC = () => {
           <ActionButton
             label="Generate Itinerary"
             icon="✧"
-            onClick={() => handleSubmit}
+            onClick={() => {}}
             variant="primary"
             disabled={loading}
           />
@@ -234,14 +238,7 @@ export const TripForm: React.FC = () => {
       {loading && (
         <div className="trip-form__loading">
           <div className="trip-form__loading-spinner"></div>
-          <p>Crafting your perfect journey...</p>
-        </div>
-      )}
-
-      {output && (
-        <div className="trip-form__output">
-          <h3>Your Journey Blueprint</h3>
-          <pre>{JSON.stringify(output, null, 2)}</pre>
+          <p>Processing your journey details...</p>
         </div>
       )}
     </div>
