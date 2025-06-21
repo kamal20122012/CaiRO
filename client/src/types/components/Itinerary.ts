@@ -1,4 +1,11 @@
-export interface Activity {
+// Base interface for common properties
+interface BaseActivity {
+    name: string;
+    location: string;
+    price: number;
+  }
+  
+  export interface Activity {
     time: string;
     name: string;
     location: string;
@@ -15,8 +22,26 @@ export interface Activity {
     activities: Activity[];
   }
   
+  export interface Hotel extends BaseActivity {
+    checkIn: string;
+    checkOut: string;
+    rating: number;
+  }
+  
+  export interface Flight extends BaseActivity {
+    date: string;
+    departureTime: string;
+    arrivalTime: string;
+    source: string;
+    destination: string;
+  }
+  
   export interface ItineraryData {
     title: string;
     overview: string;
     days: DayPlan[];
+    travelArrangements: {
+      flights: Flight[];
+      hotels: Hotel[];
+    };
   }

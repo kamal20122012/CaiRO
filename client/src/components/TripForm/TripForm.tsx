@@ -1,31 +1,8 @@
 import React, { useState } from 'react';
 import { ActionButton } from '@/components/ActionButton/ActionButton';
+import { TripFormOutput } from '@/types/components/TripForm';
+import { TripFormData } from '@/types/components/TripForm';
 import './TripForm.css';
-
-interface TripFormData {
-  vibe: string;
-  source: string;
-  destination: string;
-  departureDate: string;
-  arrivalDate: string;
-  activities: string[];
-  duration: number;
-  beenBefore: boolean;
-}
-
-interface TripFormOutput {
-  source: string;
-  destination: string;
-  departureDate: string;
-  arrivalDate: string;
-  days: number;
-  trip_theme: string;
-  user_mood: string;
-  vibe_keywords: string[];
-  activities: string[];
-  avoid: string[];
-  been_here_before: boolean;
-}
 
 const ACTIVITIES = [
   'Long walks',
