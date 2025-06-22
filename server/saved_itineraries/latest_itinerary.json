@@ -1,89 +1,308 @@
 {
   "metadata": {
-    "destination": "Mumbai, Maharashtra, India",
-    "source": "Delhi, India",
-    "departure_date": "2025-06-23",
-    "arrival_date": "2025-06-24",
-    "days": 1,
-    "trip_theme": "La tomatini",
-    "user_mood": "exploratory",
+    "destination": "Tokyo",
+    "source": "New York",
+    "departure_date": "2024-03-15",
+    "arrival_date": "2024-03-20",
+    "days": 5,
+    "trip_theme": "cultural",
+    "user_mood": "adventurous",
     "vibe_keywords": [
-      "tomatini"
+      "temples",
+      "food",
+      "culture"
     ],
     "activities": [
-      "Bustling Markets",
-      "Bollywood Tours"
+      "sightseeing",
+      "food tours",
+      "museums"
     ],
     "avoid": [
-      "crowds",
-      "strict schedules"
+      "crowded places"
     ],
     "been_here_before": false
   },
   "itinerary": {
-    "title": "Mumbai Market & Bollywood Route",
-    "overview": "Optimize market, Bollywood, local experience.",
+    "title": "Optimized Tokyo Cultural Immersion: 5-Day Adventure",
+    "overview": "Efficiently explore Tokyo's culture, history.",
     "days": [
       {
         "day": 1,
-        "title": "Colaba, Crawford & Bollywood Buzz",
-        "narrative": "Optimize route for market, film.",
+        "title": "Asakusa: Tradition Focused",
+        "narrative": "Explore Sensoji, Edo culture, Asakusa.",
         "activities": [
           {
-            "time": "9:00 AM",
-            "name": "Crawford Market Exploration",
-            "location": "Crawford Market",
-            "description": "Start day amidst market bustle.",
-            "image": "https://www.defenseadvancement.com/wp-content/uploads/2023/04/Tristan-Crawford-and-Emmanuel-Pasqualini-AERALIS-and-SDTS-225x300.jpeg"
+            "time": "8:30 AM",
+            "name": "Traditional Breakfast",
+            "location": "Asakusa local shop",
+            "description": "Try Monjayaki, local specialty.",
+            "image": "https://cdn.informaconnect.com/platform/files/public/2023-12/background/400x600/Miru%20Japanese%20breakfast-forCMS.jpg?VersionId=h_xd_sBBGk0OzSPsEjrS7lYj_ND4p9FR"
           },
           {
-            "time": "10:30 AM",
-            "name": "Crawford Breakfast",
-            "location": "Crawford Market",
-            "description": "Street food inside or nearby. Try vada pav or pav bhaji.",
-            "image": "http://ranney-crawford.com/images/RanneyCrawfordSpring.jpg"
+            "time": "9:30 AM",
+            "name": "Sensoji Temple Visit",
+            "location": "Sensoji Temple",
+            "description": "Explore Nakamise-dori shops.",
+            "image": "https://media.tacdn.com/media/attractions-splice-spp-360x240/12/49/06/0b.jpg"
           },
           {
-            "time": "1:00 PM",
-            "name": "Film City Tour",
-            "location": "Film City",
-            "description": "Pre-booked tour, travel by local.",
-            "image": "https://www.pelago.com/img/products/IN-India/full-day-ramoji-film-city-tour-with-lunch-and-transfers/99f3ed0d-f95b-43d4-b06e-5a656ae3ec0a_full-day-ramoji-film-city-tour-with-lunch-and-transfers-small.webp"
+            "time": "12:30 PM",
+            "name": "Tempura Lunch",
+            "location": "Daikokuya Tempura",
+            "description": "Authentic tempura experience.",
+            "image": "https://d1o84luq0jqpf6.cloudfront.net/rails/active_storage/representations/proxy/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBBdldqIiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--0daaf57b53fb2323704f192fe6cd4fd24797f8db/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2RTNKbGMybDZaVjkwYjE5bWFXeHNXd2RwQWdRQmFRR2ciLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--354c77d913d35998b8e5ec2bc6319ad25a64d7b1/2119319_m%20(1).jpg"
           },
           {
-            "time": "3:30 PM",
-            "name": "Film City Food Stop",
-            "location": "Film City Area",
-            "description": "Quick bite of local Maharashtrian snacks like Misal Pav outside Film City.",
-            "image": "https://upload.wikimedia.org/wikipedia/en/6/6a/Super_Size_Me_Poster.jpg"
+            "time": "2:00 PM",
+            "name": "Shitamachi Museum Visit",
+            "location": "Shitamachi Museum",
+            "description": "Edo-era life recreation.",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/df/18/b5/caption.jpg?w=300&h=300&s=1"
           },
           {
-            "time": "4:00 PM",
-            "name": "Colaba Causeway Exploration",
-            "location": "Colaba Causeway",
-            "description": "Street shopping after travel.",
-            "image": "https://www.oberoihotels.com/-/media/oberoi-hotels/website-images/the-oberoi-mumbai/destination/thumbnail/colaba-marke.jpg?w=362&hash=12dd3eef2a698a1d83c344b6b74fe2b7"
+            "time": "4:30 PM",
+            "name": "Calligraphy Workshop",
+            "location": "Asakusa Culture Tourist Center",
+            "description": "Learn Shodo techniques.",
+            "image": "https://d1s09xku4jkn9v.cloudfront.net/alternate/c514511d44b84eae89eb890efc885b31_800.jpeg"
           },
           {
-            "time": "5:30 PM",
-            "name": "Cafe Stop, Social Interaction",
-            "location": "Colaba Area",
-            "description": "Irani cafe/local spot. Try bun maska and chai.",
-            "image": "https://images.stockcake.com/public/e/4/6/e462056d-0e82-4159-a59e-aa128924be12_medium/cafeteria-social-interaction-stockcake.jpg"
+            "time": "7:00 PM",
+            "name": "Edomae Sushi Dinner",
+            "location": "Sushi restaurant in Asakusa",
+            "description": "Fresh Edomae sushi.",
+            "image": "https://www.pelago.com/img/products/JP-Japan/sushiya-sushi-restaurant-in-ginza-tokyo-japan/a229b5fd-2c2a-4637-bf6b-d4a40591feed_sushiya-sushi-restaurant-in-ginza-tokyo-japan-small.jpg"
           },
           {
-            "time": "7:30 PM",
-            "name": "Colaba Dinner",
-            "location": "Colaba",
-            "description": "Find a budget-friendly local place. Look for seafood options.",
-            "image": "https://stat5.bollywoodhungama.in/wp-content/uploads/2018/06/Priyanka-Chopra-Nick-Jonas-and-Madhu-Chopra-snapped-for-dinner-in-Taj-colaba-1-346x260.jpg"
+            "time": "8:30 PM",
+            "name": "Kabuki Theater",
+            "location": "Kabukiza Theatre (nearby)",
+            "description": "Experience Kabuki performance.",
+            "image": "https://cdn.britannica.com/62/1862-050-B1AC1BB0/Interior-theatre-woodcut-triptych-Kabuki-Utagawa-Toyokuni.jpg?w=400&h=225&c=crop"
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "title": "Ueno Park: Museums and Nature",
+        "narrative": "Explore Ueno's art, science, nature.",
+        "activities": [
+          {
+            "time": "8:30 AM",
+            "name": "Japanese Breakfast",
+            "location": "Ueno local cafe",
+            "description": "Tea and pastries.",
+            "image": "https://cdn.informaconnect.com/platform/files/public/2023-12/background/400x600/Miru%20Japanese%20breakfast-forCMS.jpg?VersionId=h_xd_sBBGk0OzSPsEjrS7lYj_ND4p9FR"
           },
           {
-            "time": "9:00 PM",
-            "name": "Colaba Nightlife",
-            "location": "Colaba",
-            "description": "Enjoy budget-friendly social scene.",
-            "image": "https://pix10.agoda.net/property/1482435/0/ac0b28f04a8ca8e0be46560aa7d31773.jpeg?s=414x232"
+            "time": "9:30 AM",
+            "name": "Tokyo National Museum",
+            "location": "Tokyo National Museum",
+            "description": "Japanese art and history.",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Tokyo_National_Museum%2C_Honkan_2010.jpg/330px-Tokyo_National_Museum%2C_Honkan_2010.jpg"
+          },
+          {
+            "time": "12:30 PM",
+            "name": "Ueno Park Lunch",
+            "location": "In Ueno park",
+            "description": "Bento box in park.",
+            "image": "https://pix10.agoda.net/hotelImages/200527/-1/d39f388f11494c9751dfb420edec52c0.jpg?ce=0&s=414x232"
+          },
+          {
+            "time": "2:00 PM",
+            "name": "National Museum Nature & Science",
+            "location": "National Museum Nature & Science",
+            "description": "Dinosaurs and science exhibits.",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/NMNC01s3200.jpg/250px-NMNC01s3200.jpg"
+          },
+          {
+            "time": "4:30 PM",
+            "name": "Nezu Shrine Walk",
+            "location": "Nezu Shrine",
+            "description": "Traditional shrine architecture.",
+            "image": "https://dims.apnews.com/dims4/default/f28e5c0/2147483647/strip/true/crop/4000x2663+0+2/resize/320x213!/quality/90/?url=https%3A%2F%2Fassets.apnews.com%2F33%2F19%2F3d2d8049fedd8b62efcc3fdaa47b%2F797b619ab2084eca91cbe8d2017cd513"
+          },
+          {
+            "time": "7:00 PM",
+            "name": "Yakitori Dinner",
+            "location": "Yakitori in Ueno",
+            "description": "Different yakitori skewers.",
+            "image": "https://rimage.savorjapan.com/svj/image/discover_oishii_japan/471/article_91042_w640z.jpg"
+          },
+          {
+            "time": "8:30 PM",
+            "name": "Traditional Music",
+            "location": "Local theater (Ueno area)",
+            "description": "Japanese music concert.",
+            "image": "https://www.pelago.com/img/products/JP-Japan/traditional-japanese-music-zakuro-show-in-tokyo/03a9b01f-6440-457c-abb2-042eb0f33dbf_traditional-japanese-music-zakuro-show-in-tokyo-small.webp"
+          }
+        ]
+      },
+      {
+        "day": 3,
+        "title": "Shibuya & Harajuku: Modern Art",
+        "narrative": "Explore art, shrine, Shibuya/Harajuku.",
+        "activities": [
+          {
+            "time": "8:30 AM",
+            "name": "Breakfast at Shibuya",
+            "location": "Local Shibuya cafe",
+            "description": "People-watching.",
+            "image": "https://pix10.agoda.net/hotelImages/7005/-1/aceaae8ca81b75366b8c49b8ab4176e9.jpg?ce=0&s=414x232"
+          },
+          {
+            "time": "9:30 AM",
+            "name": "Meiji Jingu Shrine",
+            "location": "Meiji Jingu Shrine (near)",
+            "description": "Serene forest shrine.",
+            "image": "https://www.meijijingu.or.jp/en/whattosee/images/menu_img01.jpg"
+          },
+          {
+            "time": "12:30 PM",
+            "name": "Lunch in Harajuku",
+            "location": "Harajuku restaurant",
+            "description": "Street food/cuisine.",
+            "image": "https://cdn.cheapoguides.com/wp-content/uploads/sites/2/2017/07/Takeshita-Crowds-Harajuku-iStock-624490332-aon168-362x193.jpg"
+          },
+          {
+            "time": "2:00 PM",
+            "name": "National Art Center, Tokyo",
+            "location": "National Art Center Tokyo (NACT)",
+            "description": "Contemporary art exhibitions.",
+            "image": "https://www.accessible-japan.com/wp-content/uploads/2019/04/1569_national_art_center_tokyo-300x225.jpg"
+          },
+          {
+            "time": "4:30 PM",
+            "name": "Tea Ceremony",
+            "location": "Tea house in Shibuya",
+            "description": "Traditional tea culture.",
+            "image": "https://byfood.b-cdn.net/api/public/assets/63815/content?optimizer=image&width=400&sharpen=true"
+          },
+          {
+            "time": "7:00 PM",
+            "name": "Shabu-Shabu Dinner",
+            "location": "Shabu-Shabu in Shibuya",
+            "description": "Hot pot experience.",
+            "image": "https://lirp.cdn-website.com/ccb3c305/dms3rep/multi/opt/g2-shabu-shabu-shop-front-640w.jpg"
+          },
+          {
+            "time": "8:30 PM",
+            "name": "Jazz Bar",
+            "location": "Jazz Bar in Shibuya",
+            "description": "Live music.",
+            "image": "https://img.freepik.com/premium-photo/image-is-dark-moody-jazz-club-there-is-single-spotlight-stage-where-piano-player-is-sitting_14117-337698.jpg?w=360"
+          }
+        ]
+      },
+      {
+        "day": 4,
+        "title": "Eastern Tokyo History & Gardens",
+        "narrative": "Edo-Tokyo, gardens, river cruise.",
+        "activities": [
+          {
+            "time": "8:30 AM",
+            "name": "Kiyosumi breakfast",
+            "location": "Kiyosumi Cafe",
+            "description": "Coffee and pastries.",
+            "image": "https://pix10.agoda.net/hotelImages/1637453/-1/fd5869a5cb2c24574d4a7922862818e8.jpg?ca=22&ce=0&s=414x232"
+          },
+          {
+            "time": "9:30 AM",
+            "name": "Edo-Tokyo Museum",
+            "location": "Edo-Tokyo Museum",
+            "description": "Tokyo's history.",
+            "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Edo-Tokyo_Museum.jpg/250px-Edo-Tokyo_Museum.jpg"
+          },
+          {
+            "time": "12:30 PM",
+            "name": "Monjayaki Lunch",
+            "location": "Tsukishima Monja Street (nearby)",
+            "description": "DIY pancake.",
+            "image": "https://rimage.savorjapan.com/svj/image/0020007276/photo/0020007276P2XEx1ubcP315ziPT_352x235d80.jpg?t=1748988338"
+          },
+          {
+            "time": "2:00 PM",
+            "name": "Kiyosumi Garden",
+            "location": "Kiyosumi Garden",
+            "description": "Traditional garden walk.",
+            "image": "https://tokyogardentours.com/wp-content/uploads/2018/09/kiyosumi-fruhling425.jpg"
+          },
+          {
+            "time": "4:30 PM",
+            "name": "Sumida River Cruise",
+            "location": "Sumida River",
+            "description": "Scenic tour.",
+            "image": "https://i.ytimg.com/vi/7XWJy9JaLjA/mqdefault.jpg"
+          },
+          {
+            "time": "7:00 PM",
+            "name": "Ramen Dinner",
+            "location": "Ramen restaurant",
+            "description": "Explore shops.",
+            "image": "https://s3-media0.fl.yelpcdn.com/bphoto/ihYPYqJHYMz78nf3mAVLcg/258s.jpg"
+          },
+          {
+            "time": "8:30 PM",
+            "name": "Noh Theater",
+            "location": "Noh theater",
+            "description": "Noh play experience.",
+            "image": "https://www.keioplaza.com/press/images/201804_ph01.jpg"
+          }
+        ]
+      },
+      {
+        "day": 5,
+        "title": "Zojoji, Ginza Art & Elegance",
+        "narrative": "Temple view, Ginza art, workshop.",
+        "activities": [
+          {
+            "time": "8:30 AM",
+            "name": "Zojoji Breakfast",
+            "location": "Zojoji Cafe",
+            "description": "Pastries and coffee.",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/21/c4/c5/c6/zojoji-is-a-large-temple.jpg?w=300&h=300&s=1"
+          },
+          {
+            "time": "9:30 AM",
+            "name": "Zojo-ji Temple Visit",
+            "location": "Zojo-ji Temple",
+            "description": "Tokyo Tower view.",
+            "image": "https://savorjapan.com/assets/frontend/img/spot/zojoji_330x218d80.jpg?v=cc41e6ffb358d9996e3a6084077a3d3f"
+          },
+          {
+            "time": "12:30 PM",
+            "name": "Lunch in Ginza",
+            "location": "Ginza restaurant",
+            "description": "Upscale dining.",
+            "image": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0f/9d/b8/ca/samosa-snack-salad.jpg?w=400&h=300&s=1"
+          },
+          {
+            "time": "2:00 PM",
+            "name": "Mitsui Memorial Museum",
+            "location": "Mitsui Memorial Museum",
+            "description": "Japanese art.",
+            "image": "https://www.japanistry.com/wp-content/uploads/2017/09/Mitsui-Memorial-Museum-v01-380x200.jpg"
+          },
+          {
+            "time": "4:30 PM",
+            "name": "Paper Making Workshop",
+            "location": "Paper Making workshop (Ginza)",
+            "description": "Washi paper class.",
+            "image": "https://cdn.evbuc.com/images/850491489/143450669465/1/logo.20240915-041355"
+          },
+          {
+            "time": "7:00 PM",
+            "name": "Kaiseki Dinner",
+            "location": "Kaiseki restaurant in Ginza",
+            "description": "Japanese haute cuisine.",
+            "image": "https://rimage.savorjapan.com/svj/image/0032012929/photo/0032012929PmyhiqSb3JXte76if_352x235d80.jpg?t=1748988450"
+          },
+          {
+            "time": "8:30 PM",
+            "name": "Ginza Bar",
+            "location": "Ginza bar",
+            "description": "Upscale cocktails.",
+            "image": "https://butler-gr.com/wp-content/uploads/sb-instagram-feed-images/307592487_1491888904645664_8986275573775260896_nlow.jpg"
           }
         ]
       }

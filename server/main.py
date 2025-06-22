@@ -5,6 +5,9 @@ from typing import List
 import logging
 import json
 import os
+import dotenv
+
+dotenv.load_dotenv()
 
 # Import the functions from existing modules
 from create_itnr import create_itinerary, update_itinerary

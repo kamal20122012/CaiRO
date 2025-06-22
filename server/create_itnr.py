@@ -818,7 +818,7 @@ def process_single_activity_image(activity: dict, api_key: str, cse_id: str, des
         return activity, 'failed'
 
 
-def add_images_to_activities(itinerary_json: str, destination: str = "", api_key: str = "", cse_id: str = "", use_fallback: bool = True, max_workers: int = 5) -> str:
+def add_images_to_activities(itinerary_json: str, destination: str = "", api_key: str = "AIzaSyA1Grg9lYjY2xa-ksP_d1VdSli3B_9LCLM", cse_id: str = "3788ce9cca864429b", use_fallback: bool = True, max_workers: int = 5) -> str:
     """
     Add image URLs to activities in the itinerary JSON using parallel processing.
     
@@ -841,6 +841,8 @@ def add_images_to_activities(itinerary_json: str, destination: str = "", api_key
         cse_id = os.getenv("GOOGLE_CSE_ID")
     
     # Validate required credentials
+    logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}🔑 API Key: {api_key[:10]}...{Colors.RESET}")
+    logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.BLUE}🔍 CSE ID: {cse_id}{Colors.RESET}")
     if not api_key or not cse_id:
         logging.warning(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}⚠️ Google Custom Search credentials not available. Skipping image processing.{Colors.RESET}")
         logging.warning(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}   Please set GOOGLE_CSE_API_KEY and GOOGLE_CSE_ID environment variables{Colors.RESET}")
