@@ -11,6 +11,8 @@ itnr_2_nightlife = """
 User likes {user_pref}, use the list above --> dont worry about the hotel bookings and all, just make an itinerary based on the above lists
 make a {n_days} Day itinerary in the following format. This is for someone who enjoys nightlife and late-night activities.
 
+IMPORTANT: Keep all titles, overviews, narratives, and notes as crisp one-liners with minimal words (max 5-8 words).
+
 {{
   "title": "....",
   "overview": "....",
@@ -78,6 +80,8 @@ No extra text just the JSON above.
 itnr_2_family = """
 User likes {user_pref}, use the list above --> dont worry about the hotel bookings and all, just make an itinerary based on the above lists
 make a {n_days} Day itinerary in the following format. This is for a family with structured meal times and kid-friendly activities.
+
+IMPORTANT: Keep all titles, overviews, narratives, and notes as crisp one-liners with minimal words (max 5-8 words).
 
 {{
   "title": "....",
@@ -155,6 +159,8 @@ itnr_2_luxury = """
 User likes {user_pref}, use the list above --> dont worry about the hotel bookings and all, just make an itinerary based on the above lists
 make a {n_days} Day itinerary in the following format. This is for a luxury traveler who prefers premium experiences and relaxed pace.
 
+IMPORTANT: Keep all titles, overviews, narratives, and notes as crisp one-liners with minimal words (max 5-8 words).
+
 {{
   "title": "....",
   "overview": "....",
@@ -222,6 +228,8 @@ No extra text just the JSON above.
 itnr_2_backpacker = """
 User likes {user_pref}, use the list above --> dont worry about the hotel bookings and all, just make an itinerary based on the above lists
 make a {n_days} Day itinerary in the following format. This is for a budget-conscious backpacker who loves authentic local experiences.
+
+IMPORTANT: Keep all titles, overviews, narratives, and notes as crisp one-liners with minimal words (max 5-8 words).
 
 {{
   "title": "....",
@@ -298,6 +306,8 @@ itnr_2_cultural = """
 User likes {user_pref}, use the list above --> dont worry about the hotel bookings and all, just make an itinerary based on the above lists
 make a {n_days} Day itinerary in the following format. This is for a cultural enthusiast who wants deep, educational experiences.
 
+IMPORTANT: Keep all titles, overviews, narratives, and notes as crisp one-liners with minimal words (max 5-8 words).
+
 {{
   "title": "....",
   "overview": "....",
@@ -372,6 +382,8 @@ No extra text just the JSON above.
 itnr_2_adventure = """
 User likes {user_pref}, use the list above --> dont worry about the hotel bookings and all, just make an itinerary based on the above lists
 make a {n_days} Day itinerary in the following format. This is for an adventure seeker who wants action-packed, outdoor experiences.
+
+IMPORTANT: Keep all titles, overviews, narratives, and notes as crisp one-liners with minimal words (max 5-8 words).
 
 {{
   "title": "....",
@@ -456,6 +468,8 @@ itnr_2_romantic = """
 User likes {user_pref}, use the list above --> dont worry about the hotel bookings and all, just make an itinerary based on the above lists
 make a {n_days} Day itinerary in the following format. This is for a romantic couple seeking intimate and memorable experiences.
 
+IMPORTANT: Keep all titles, overviews, narratives, and notes as crisp one-liners with minimal words (max 5-8 words).
+
 {{
   "title": "....",
   "overview": "....",
@@ -531,6 +545,8 @@ No extra text just the JSON above.
 itnr_2_business = """
 User likes {user_pref}, use the list above --> dont worry about the hotel bookings and all, just make an itinerary based on the above lists
 make a {n_days} Day itinerary in the following format. This is for a business traveler with limited time seeking efficient experiences.
+
+IMPORTANT: Keep all titles, overviews, narratives, and notes as crisp one-liners with minimal words (max 5-8 words).
 
 {{
   "title": "....",
@@ -615,6 +631,8 @@ itnr_2_wellness = """
 User likes {user_pref}, use the list above --> dont worry about the hotel bookings and all, just make an itinerary based on the above lists
 make a {n_days} Day itinerary in the following format. This is for someone seeking wellness, relaxation, and mindful travel.
 
+IMPORTANT: Keep all titles, overviews, narratives, and notes as crisp one-liners with minimal words (max 5-8 words).
+
 {{
   "title": "....",
   "overview": "....",
@@ -698,6 +716,8 @@ itnr_2_foodie = """
 User likes {user_pref}, use the list above --> dont worry about the hotel bookings and all, just make an itinerary based on the above lists
 make a {n_days} Day itinerary in the following format. This is for a food enthusiast who wants to explore local cuisine deeply.
 
+IMPORTANT: Keep all titles, overviews, narratives, and notes as crisp one-liners with minimal words (max 5-8 words).
+
 {{
   "title": "....",
   "overview": "....",
@@ -779,5 +799,5 @@ No extra text just the JSON above.
 """
 
 itnr_3 = """
-keep the items same but now try to optimize the itinerary based on their locations and distances
+keep the items same but now try to optimize the itinerary based on their locations and distances. Make sure it adheres JSOn strcuture, no unneccesary \n characters.
 """

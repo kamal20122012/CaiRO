@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Activity } from '@/types/components/Itinerary';
 import './ActivityCard.css';
 
@@ -7,15 +7,49 @@ interface ActivityCardProps {
 }
 
 export const ActivityCard: React.FC<ActivityCardProps> = ({ activity }) => {
+  const [imageError, setImageError] = useState(false);
+  const [imageLoading, setImageLoading] = useState(true);
+
+  // Fallback image URLs in order of preference
+  const fallbackImages = [
+    'https://via.placeholder.com/400x300/8B5CF6/FFFFFF?text=Travel+Activity',
+    'https://picsum.photos/400/300?random=100',
+    'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjOEI1Q0Y2Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMTUwIiBmaWxsPSJ3aGl0ZSIgZm9udC1zaXplPSIxOCIgZm9udC1mYW1pbHk9IkFyaWFsIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+VHJhdmVsIEFjdGl2aXR5PC90ZXh0Pgo8L3N2Zz4K'
+  ];
+
+  const handleImageError = () => {
+    setImageError(true);
+    setImageLoading(false);
+  };
+
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
+
+  // Determine which image to show
+  const getImageSrc = () => {
+    if (!activity.image || imageError) {
+      return fallbackImages[0]; // Use the first fallback
+    }
+    return activity.image;
+  };
+
   return (
     <div className="activity-card">
       <div className="activity-card__image-container">
-        {activity.image && (
-          <img 
-            src={activity.image} 
-            alt={activity.name} 
-            className="activity-card__image"
-          />
+        {/* Always show an image, whether it's the activity image or fallback */}
+        <img 
+          src={getImageSrc()}
+          alt={activity.name || 'Travel Activity'} 
+          className={`activity-card__image ${imageLoading ? 'loading' : ''}`}
+          onError={handleImageError}
+          onLoad={handleImageLoad}
+          loading="lazy"
+        />
+        {imageLoading && (
+          <div className="activity-card__image-loader">
+            <div className="loader-spinner"></div>
+          </div>
         )}
       </div>
       <div className="activity-card__content">

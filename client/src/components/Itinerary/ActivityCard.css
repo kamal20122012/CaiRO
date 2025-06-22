@@ -22,6 +22,7 @@
   flex: 0 0 40%;
   position: relative;
   overflow: hidden;
+  background: #f8f9fa; /* Light background for loading state */
 }
 
 .activity-card__image {
@@ -29,6 +30,33 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
+  transition: opacity 0.3s ease;
+}
+
+.activity-card__image.loading {
+  opacity: 0.7;
+}
+
+.activity-card__image-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.loader-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e5e7eb;
+  border-top: 3px solid #8b5cf6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .activity-card__content {

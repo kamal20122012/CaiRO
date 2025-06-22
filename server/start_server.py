@@ -5,9 +5,39 @@ Startup script for CaiRO Travel API server.
 
 import os
 import sys
+import sqlite3
 import multiprocessing
 import uvicorn
 from main import app
+from db_init import store_persona_embeddings
+
+def check_and_init_database():
+    """Check if persona_embeddings table exists, create and populate if not."""
+    try:
+        # Check if database and table exist
+        conn = sqlite3.connect('personas.db')
+        cursor = conn.cursor()
+        
+        # Check if persona_embeddings table exists
+        cursor.execute("""
+            SELECT name FROM sqlite_master 
+            WHERE type='table' AND name='persona_embeddings'
+        """)
+        
+        table_exists = cursor.fetchone() is not None
+        conn.close()
+        
+        if not table_exists:
+            print("🔧 Database table not found. Initializing persona embeddings...")
+            print("⏳ This may take a few moments for first-time setup...")
+            store_persona_embeddings()
+            print("✅ Database initialization completed!")
+        else:
+            print("✅ Database table exists and ready!")
+            
+    except Exception as e:
+        print(f"❌ Error during database check/initialization: {e}")
+        print("⚠️  Server will continue but persona matching may not work correctly.")
 
 def main():
     """Start the FastAPI server."""
@@ -20,6 +50,10 @@ def main():
         print("\nOr add it to your .env file:")
         print("GEMINI_API_KEY=your-api-key-here")
         sys.exit(1)
+    
+    # Check and initialize database if needed
+    print("🗄️  Checking database setup...")
+    check_and_init_database()
     
     # Calculate optimal number of workers
     # Use CPU count or set a maximum based on your server capacity
