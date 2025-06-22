@@ -6,7 +6,7 @@ export class ApiClient {
 
   private constructor() {
     this.axiosInstance = axios.create({
-      baseURL: 'http://35.192.169.96/api',
+      baseURL: 'http://35.192.169.96:3001/api',
       headers: {
         'Content-Type': 'application/json',
       },
