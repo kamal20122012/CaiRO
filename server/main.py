@@ -9,6 +9,7 @@ import os
 # Import the functions from existing modules
 from create_itnr import create_itinerary, update_itinerary
 from agents import search_flights, search_hotels
+from suggestions import suggest_activities
 
 # ANSI Color codes for colored logging
 class Colors:
@@ -74,6 +75,10 @@ class TripFormOutput(BaseModel):
 class UpdateItineraryRequest(BaseModel):
     user_request: str
 
+# Pydantic model for activity suggestions request
+class ActivitySuggestionsRequest(BaseModel):
+    city: str
+
 # Root endpoint
 @app.get("/")
 async def root():
@@ -84,6 +89,7 @@ async def root():
             "generate_itinerary": "/api/itinerary/generate",
             "update_itinerary": "/api/itinerary/update",
             "get_latest_itinerary": "/api/itinerary/latest",
+            "suggest_activities": "/api/itinerary/suggest/activities",
             "generate_flights": "/api/flights/generate", 
             "generate_hotels": "/api/hotels/generate"
         }
@@ -216,6 +222,34 @@ async def update_itinerary_endpoint(request: UpdateItineraryRequest):
     except Exception as e:
         logging.error(f"{Colors.ITINERARY_API_PREFIX} {Colors.RED}❌ Error updating itinerary: {e}{Colors.RESET}")
         raise HTTPException(status_code=500, detail=f"Error updating itinerary: {str(e)}")
+
+# Suggest activities endpoint
+@app.post("/api/itinerary/suggest/activities")
+async def suggest_activities_endpoint(request: ActivitySuggestionsRequest):
+    """
+    Get activity suggestions for a given city using AI.
+    
+    Args:
+        ActivitySuggestionsRequest: Request containing the city name
+    
+    Returns:
+        JSON response with a list of activity suggestions
+    """
+    try:
+        logging.info(f"{Colors.ITINERARY_API_PREFIX} {Colors.CYAN}🎯 Generating activity suggestions for {request.city}{Colors.RESET}")
+        
+        activities = suggest_activities(request.city)
+        
+        if activities:
+            logging.info(f"{Colors.ITINERARY_API_PREFIX} {Colors.GREEN}✅ Generated {len(activities)} activity suggestions for {request.city}{Colors.RESET}")
+            return {"status": "success", "data": {"city": request.city, "activities": activities}}
+        else:
+            logging.warning(f"{Colors.ITINERARY_API_PREFIX} {Colors.YELLOW}⚠️ No activity suggestions generated for {request.city}{Colors.RESET}")
+            return {"status": "success", "data": {"city": request.city, "activities": []}}
+            
+    except Exception as e:
+        logging.error(f"{Colors.ITINERARY_API_PREFIX} {Colors.RED}❌ Error generating activity suggestions: {e}{Colors.RESET}")
+        raise HTTPException(status_code=500, detail=f"Error generating activity suggestions: {str(e)}")
 
 # Generate flights endpoint
 @app.post("/api/flights/generate")

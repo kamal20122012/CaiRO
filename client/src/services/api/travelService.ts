@@ -225,6 +225,46 @@ export class TravelService {
     }
   }
 
+  async suggestActivities(city: string): Promise<string[]> {
+    console.log('🎯 [ACTIVITIES API] Requesting activity suggestions for:', {
+      city
+    });
+    
+    const startTime = performance.now();
+    
+    try {
+      const response = await this.apiClient.getAxiosInstance().post('/itinerary/suggest/activities', {
+        city
+      });
+      
+      const endTime = performance.now();
+      console.log('✅ [ACTIVITIES API] Response received:', {
+        status: response.status,
+        duration: `${(endTime - startTime).toFixed(2)}ms`,
+        rawResponse: response.data
+      });
+      
+      const activitiesData = response.data?.data || response.data;
+      const activities = activitiesData?.activities || [];
+      
+      console.log('🔍 [ACTIVITIES API] Parsed activities:', {
+        city: activitiesData?.city,
+        activitiesCount: activities.length,
+        activities
+      });
+      
+      return activities;
+    } catch (error) {
+      const endTime = performance.now();
+      console.error('❌ [ACTIVITIES API] Request failed:', {
+        duration: `${(endTime - startTime).toFixed(2)}ms`,
+        error: error,
+        errorMessage: error instanceof Error ? error.message : 'Unknown error'
+      });
+      throw error;
+    }
+  }
+
   // Validation helper methods
   private validateFlightData(data: any): boolean {
     return !!(data?.name && data?.price && data?.departureTime && data?.arrivalTime && data?.source && data?.destination);

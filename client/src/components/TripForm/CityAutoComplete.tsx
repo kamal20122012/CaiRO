@@ -37,20 +37,17 @@ const loadGoogleMapsScript = (apiKey: string) => {
   return googleMapsPromise;
 };
 
-// Define Google Places types
-declare global {
-  interface Window {
-    google: any;
-  }
-}
 
 interface CityAutocompleteProps {
   value: string;
   onChange: (value: string) => void;
   onSelect: (city: string) => void;
+  onConfirm?: (city: string) => void;
   placeholder: string;
   label: string;
   id: string;
+  showConfirmButton?: boolean;
+  isConfirmed?: boolean;
 }
 
 // Define the type for a single suggestion
@@ -66,9 +63,12 @@ export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
   value,
   onChange,
   onSelect,
+  onConfirm,
   placeholder,
   label,
-  id
+  id,
+  showConfirmButton = false,
+  isConfirmed = false
 }) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -169,19 +169,40 @@ export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
     setSessionToken(undefined); // End session on selection
   };
 
+  const handleConfirm = () => {
+    if (value.trim() && onConfirm) {
+      onConfirm(value);
+    }
+  };
+
   return (
     <div className="city-autocomplete" ref={wrapperRef}>
       <label htmlFor={id}>{label}</label>
-      <input
-        type="text"
-        id={id}
-        value={value}
-        onChange={handleInputChange}
-        placeholder={placeholder}
-        className="city-autocomplete__input"
-        autoComplete="off"
-      />
-      {showSuggestions && suggestions.length > 0 && (
+      <div className="city-autocomplete__input-container">
+        <input
+          type="text"
+          id={id}
+          value={value}
+          onChange={handleInputChange}
+          placeholder={placeholder}
+          className={`city-autocomplete__input ${isConfirmed ? 'city-autocomplete__input--confirmed' : ''}`}
+          autoComplete="off"
+          disabled={isConfirmed}
+        />
+        {showConfirmButton && !isConfirmed && value.trim() && (
+          <button
+            type="button"
+            onClick={handleConfirm}
+            className="city-autocomplete__confirm-btn"
+          >
+            ✓
+          </button>
+        )}
+        {isConfirmed && (
+          <span className="city-autocomplete__confirmed-icon">✓</span>
+        )}
+      </div>
+      {showSuggestions && suggestions.length > 0 && !isConfirmed && (
         <ul className="city-autocomplete__suggestions">
           {suggestions.map((suggestion, index) => (
             <li

@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { ActionButton } from '@/components/ActionButton/ActionButton';
 import { TripFormData, TripFormOutput } from '@/types/components/TripForm';
 import { CityAutocomplete } from '@/components/TripForm/CityAutoComplete';
+import { TravelService } from '@/services/api/travelService';
+import { Loader } from '@/components/common/Loader';
 import './TripForm.css';
 
 const ACTIVITIES = [
@@ -25,11 +27,16 @@ export const TripForm: React.FC = () => {
     departureDate: '',
     arrivalDate: '',
     activities: [],
-    beenBefore: false
+    beenBefore: false,
+    sourceConfirmed: false,
+    destinationConfirmed: false
   });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [dynamicActivities, setDynamicActivities] = useState<string[]>([]);
+  const [loadingActivities, setLoadingActivities] = useState(false);
+  const [activitiesError, setActivitiesError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -83,7 +90,9 @@ export const TripForm: React.FC = () => {
       departureDate: '',
       arrivalDate: '',
       activities: [],
-      beenBefore: false
+      beenBefore: false,
+      sourceConfirmed: false,
+      destinationConfirmed: false
     });
     setError('');
   };
@@ -111,6 +120,32 @@ export const TripForm: React.FC = () => {
       .slice(0, 3);
   };
 
+  const handleSourceConfirm = (source: string) => {
+    setFormData(prev => ({ ...prev, sourceConfirmed: true }));
+  };
+
+  const handleDestinationConfirm = async (destination: string) => {
+    setFormData(prev => ({ ...prev, destinationConfirmed: true }));
+    
+    // Fetch activity suggestions for the destination
+    setLoadingActivities(true);
+    setActivitiesError('');
+    setDynamicActivities([]);
+    
+    try {
+      const travelService = TravelService.getInstance();
+      const suggestions = await travelService.suggestActivities(destination);
+      setDynamicActivities(suggestions);
+    } catch (error) {
+      console.error('Error fetching activity suggestions:', error);
+      setActivitiesError('Failed to load activity suggestions. Using default activities.');
+      // Fallback to static activities in case of error
+      setDynamicActivities(ACTIVITIES);
+    } finally {
+      setLoadingActivities(false);
+    }
+  };
+
   return (
     <div className="trip-form">
       <form onSubmit={handleSubmit} className="trip-form__container">
@@ -134,7 +169,10 @@ export const TripForm: React.FC = () => {
             value={formData.source}
             onChange={(value) => setFormData(prev => ({ ...prev, source: value }))}
             onSelect={(city) => setFormData(prev => ({ ...prev, source: city }))}
+            onConfirm={handleSourceConfirm}
             placeholder="Enter your starting point"
+            showConfirmButton={true}
+            isConfirmed={formData.sourceConfirmed}
           />
         </div>
 
@@ -145,7 +183,10 @@ export const TripForm: React.FC = () => {
             value={formData.destination}
             onChange={(value) => setFormData(prev => ({ ...prev, destination: value }))}
             onSelect={(city) => setFormData(prev => ({ ...prev, destination: city }))}
+            onConfirm={handleDestinationConfirm}
             placeholder="Enter destination"
+            showConfirmButton={true}
+            isConfirmed={formData.destinationConfirmed}
           />
         </div>
 
@@ -175,23 +216,38 @@ export const TripForm: React.FC = () => {
 
         <div className="trip-form__field">
           <label>Choose your activities:</label>
-          <div className="trip-form__activities">
-            {ACTIVITIES.map(activity => (
-              <label key={activity} className="trip-form__checkbox-label">
-                <input
-                  type="checkbox"
-                  checked={formData.activities.includes(activity)}
-                  onChange={(e) => {
-                    const newActivities = e.target.checked
-                      ? [...formData.activities, activity]
-                      : formData.activities.filter(a => a !== activity);
-                    setFormData(prev => ({ ...prev, activities: newActivities }));
-                  }}
-                />
-                {activity}
-              </label>
-            ))}
-          </div>
+          {!formData.destinationConfirmed ? (
+            <div className="trip-form__activities-placeholder">
+              <p>Please confirm your destination to see activity suggestions</p>
+            </div>
+          ) : loadingActivities ? (
+            <div className="trip-form__activities-loading">
+              <Loader text={`Loading activity suggestions for ${formData.destination}...`} />
+            </div>
+          ) : (
+            <div className="trip-form__activities">
+              {activitiesError && (
+                <div className="trip-form__activities-error">
+                  {activitiesError}
+                </div>
+              )}
+              {(dynamicActivities.length > 0 ? dynamicActivities : ACTIVITIES).map(activity => (
+                <label key={activity} className="trip-form__checkbox-label">
+                  <input
+                    type="checkbox"
+                    checked={formData.activities.includes(activity)}
+                    onChange={(e) => {
+                      const newActivities = e.target.checked
+                        ? [...formData.activities, activity]
+                        : formData.activities.filter(a => a !== activity);
+                      setFormData(prev => ({ ...prev, activities: newActivities }));
+                    }}
+                  />
+                  {activity}
+                </label>
+              ))}
+            </div>
+          )}
         </div>
 
 

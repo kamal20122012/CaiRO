@@ -6,6 +6,8 @@ export interface TripFormData {
     arrivalDate: string;
     activities: string[];
     beenBefore: boolean;
+    sourceConfirmed: boolean;
+    destinationConfirmed: boolean;
   }
   
   export interface TripFormOutput {

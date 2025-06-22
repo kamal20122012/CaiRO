@@ -2,16 +2,29 @@
     position: relative;
     width: 100%;
   }
+
+  .city-autocomplete__input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
   
   .city-autocomplete__input {
     width: 100%;
     padding: 1rem;
+    padding-right: 3rem;
     border: 2px solid rgba(139, 92, 246, 0.1);
     border-radius: 12px;
     font-family: 'Inter', sans-serif;
     font-size: 1rem;
     background: rgba(255, 255, 255, 0.8);
     transition: all 0.3s ease;
+  }
+
+  .city-autocomplete__input--confirmed {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.3);
+    color: rgba(34, 197, 94, 0.8);
   }
   
   .city-autocomplete__input:focus {
@@ -48,4 +61,38 @@
   
   .city-autocomplete__suggestion:hover {
     background: rgba(139, 92, 246, 0.08);
+  }
+
+  .city-autocomplete__confirm-btn {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+  }
+
+  .city-autocomplete__confirm-btn:hover {
+    background: rgba(139, 92, 246, 0.8);
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .city-autocomplete__confirmed-icon {
+    position: absolute;
+    right: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(34, 197, 94);
+    font-size: 1.25rem;
+    font-weight: bold;
   }

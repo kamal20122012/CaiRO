@@ -1,222 +1,143 @@
 {
   "metadata": {
-    "destination": "Goa",
-    "source": "Mumbai",
-    "departure_date": "2024-02-15",
-    "arrival_date": "2024-02-19",
-    "days": 4,
-    "trip_theme": "Beach and Relaxation",
-    "user_mood": "Chill",
+    "destination": "kolkata",
+    "source": "ahmedabad",
+    "departure_date": "2025-06-25",
+    "arrival_date": "2025-06-27",
+    "days": 2,
+    "trip_theme": "quiet and calm",
+    "user_mood": "exploratory",
     "vibe_keywords": [
-      "beach",
-      "sunset",
-      "seafood"
+      "quiet",
+      "calm"
     ],
     "activities": [
-      "water sports",
-      "beach hopping",
-      "local cuisine"
+      "Historical sites",
+      "Tea/coffee rituals"
     ],
     "avoid": [
-      "crowded places",
-      "expensive restaurants"
+      "crowds",
+      "strict schedules"
     ],
     "been_here_before": false
   },
   "itinerary": {
-    "title": "Goa: Optimized Chill Beach Hopper's Budget Backpacking Itinerary",
-    "overview": "A relaxed 4-day exploration of Goa's beaches and local culture, focusing on authentic experiences, delicious street food, and minimizing costs by optimizing locations to reduce travel time. This itinerary avoids crowded tourist traps in favour of hidden gems and a slow pace.",
+    "title": "Kolkata Calm Explorations: Optimized Family Itinerary",
+    "overview": "Efficient route, historical sites, family-friendly fun.",
     "days": [
       {
         "day": 1,
-        "title": "South Goa: Palolem & Agonda Relaxation",
-        "narrative": "Arrive in South Goa and head straight to Palolem. Settle in, grab some breakfast, and spend the day exploring Palolem and nearby Agonda Beach. Consolidating to nearby beaches reduces travel time on day one.",
+        "title": "Central Kolkata History and Greenery",
+        "narrative": "Explore central area attractions efficiently.",
         "activities": [
           {
-            "time": "9:00 AM",
-            "name": "Breakfast at Palolem Beach Shack",
-            "location": "Palolem Beach",
-            "description": "Find a shack serving local Goan breakfast - Pao Bhaji, or Samosa. Enjoy the sea view."
+            "time": "8:00 AM",
+            "name": "Family Breakfast",
+            "location": "The Anchorage Bar - The Floatel Hotel",
+            "description": "Nearby Victoria Memorial, scenic views.",
+            "image": "https://brunchit.es/wp-content/uploads/2024/09/hotcakes-invernales-240x300-optimized.jpeg"
           },
           {
-            "time": "10:00 AM",
-            "name": "Relax & Swim at Palolem Beach",
-            "location": "Palolem Beach",
-            "description": "Soak up the sun, swim in the calm waters, and enjoy the peaceful atmosphere."
+            "time": "9:30 AM",
+            "name": "Victoria Memorial Exploration",
+            "location": "Victoria Memorial Hall",
+            "description": "Explore colonial history, beautiful architecture.",
+            "image": "https://i.etsystatic.com/36983037/r/il/cff85d/5881758838/il_300x300.5881758838_ewis.jpg"
           },
           {
-            "time": "1:00 PM",
-            "name": "Lunch at Palolem",
-            "location": "Palolem",
-            "description": "Find cheap local thali places at Palolem"
+            "time": "12:30 PM",
+            "name": "Lunch Break",
+            "location": "BLU - Bistro And Bar",
+            "description": "Conveniently located, family-friendly options.",
+            "image": "https://img.eurobike.at/w_342,h_213,q_80,v_01c87e,hash_04d6ce/ddcijcnkv/image/upload/v1714049979/eurobike/touren/familienreisen/at-sba-zehn-seen-fuer-familien-7-tage/NEU/eurobike-radreisen-zehn-seen-rundfahrt-wiener-schnitzel.jpg"
           },
           {
-            "time": "3:00 PM",
-            "name": "Agonda Beach Visit",
-            "location": "Agonda Beach",
-            "description": "Agonda Beach exploration. Quiet and serene, perfect for sunset."
+            "time": "2:00 PM",
+            "name": "Indian Museum Discovery",
+            "location": "Indian Museum",
+            "description": "Explore diverse artifacts, interactive exhibits.",
+            "image": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_200,q_75,w_300/v1/clients/newyorkstate/Antique_Boat_Museum_Boat_Rides_25aebb86-025d-4325-9f4d-d027d6a0ae8b.jpg"
           },
           {
-            "time": "5:00 PM",
-            "name": "Sunset Drinks",
-            "location": "Agonda Beach",
-            "description": "Kingfisher beer at a beach shack while enjoying the sunset."
+            "time": "4:00 PM",
+            "name": "Tea and Snacks",
+            "location": "Cheers - The Astor Hotel",
+            "description": "Relaxing tea, near Maidan.",
+            "image": "https://dishingoutplants.com/wp-content/uploads/2024/07/jackfruit-curry-1200-x-1200-Alex-did-optimized-300x300.jpg"
           },
           {
-            "time": "7:30 PM",
-            "name": "Dinner at Agonda",
-            "location": "Near Agonda Market",
-            "description": "Goan Fish Thali, seafood curries."
+            "time": "6:30 PM",
+            "name": "Family Dinner",
+            "location": "Ego Retro Lounge - The Peerless Inn",
+            "description": "Comfortable setting, good selection.",
+            "image": "https://cf.geekdo-images.com/Gow8rSx_TnrzXeIh19PgrA__itemrep/img/IcDpGdipHnAuAdKzGISqtFWIk8I=/fit-in/246x300/filters:strip_icc()/pic8332045.png"
           },
           {
-            "time": "9:00 PM",
-            "name": "Chill Evening",
-            "location": "Agonda/Palolem",
-            "description": "Relax at the beach or your accommodation."
+            "time": "8:00 PM",
+            "name": "Maidan Relaxation",
+            "location": "Maidan",
+            "description": "Evening stroll, open space, calm.",
+            "image": "https://content.jdmagicbox.com/comp/warangal/j1/9999px870.x870.231221161337.n7j1/catalogue/jk-pride-family-restaurant-and-bar-hanamkonda-warangal-restaurants-5v3ff51tye-250.jpg"
           }
         ]
       },
       {
         "day": 2,
-        "title": "South Goa: Exploring Cavelossim & Nearby Beaches",
-        "narrative": "Focus on the beaches closer to Cavelossim to avoid long commutes. This allows for a more relaxed exploration of the Southern coastline.",
-        "activities": [
-          {
-            "time": "9:00 AM",
-            "name": "Breakfast Near Cavelossim",
-            "location": "Local Cafe near Cavelossim",
-            "description": "Goan snacks and chai."
-          },
-          {
-            "time": "10:00 AM",
-            "name": "Cavelossim/Mabor Beach - Watersports",
-            "location": "Cavelossim/Mabor Beach",
-            "description": "Clean sands, parasailing and jet skiing options available."
-          },
-          {
-            "time": "1:00 PM",
-            "name": "Lunch near Cavelossim",
-            "location": "Cavelossim Beach",
-            "description": "Beachside cafe, seafood curry."
-          },
-          {
-            "time": "3:00 PM",
-            "name": "Varca Beach",
-            "location": "Varca Beach",
-            "description": "Just north of Cavelossim, walk or short ride."
-          },
-          {
-            "time": "5:00 PM",
-            "name": "Explore Local Shops at Varca",
-            "location": "Near Varca",
-            "description": "Handicrafts, clothes."
-          },
-          {
-            "time": "7:30 PM",
-            "name": "Dinner Cavelossim",
-            "location": "Near Cavelossim Market",
-            "description": "Authentic Goan."
-          },
-          {
-            "time": "9:00 PM",
-            "name": "Relaxed Evening",
-            "location": "Accommodation",
-            "description": "Relax at your accommodation"
-          }
-        ]
-      },
-      {
-        "day": 3,
-        "title": "Dudhsagar Falls & Spice Plantation",
-        "narrative": "A day trip to Dudhsagar Falls, one of India's tallest waterfalls and a visit to a local spice plantation.",
+        "title": "Northern Kolkata Temples and Gardens",
+        "narrative": "North Kolkata, cultural and natural sites.",
         "activities": [
           {
             "time": "8:00 AM",
-            "name": "Dudhsagar Falls Trip",
-            "location": "Dudhsagar Falls",
-            "description": "Early start for the trip to Dudhsagar Falls. Jeep safari to the falls base (arrange tour in advance)."
+            "name": "Family Breakfast",
+            "location": "Raize The Bar",
+            "description": "Set breakfast before exploring northern sites",
+            "image": "https://brunchit.es/wp-content/uploads/2024/09/hotcakes-invernales-240x300-optimized.jpeg"
           },
           {
-            "time": "1:00 PM",
-            "name": "Lunch at Spice Plantation",
-            "location": "Near Dudhsagar Falls",
-            "description": "Traditional Goan lunch at a Spice Plantation."
+            "time": "9:30 AM",
+            "name": "Gurusaday Museum Visit",
+            "location": "Gurusaday Museum",
+            "description": "Explore rural arts and crafts of Bengal.",
+            "image": "https://imgv2-1-f.scribdassets.com/img/document/743218547/149x198/2a092b5ef3/1718734776?v=1"
           },
           {
-            "time": "2:30 PM",
-            "name": "Spice Plantation Tour",
-            "location": "Spice Plantation",
-            "description": "Guided tour of the spice plantation, learning about local spices."
+            "time": "12:30 PM",
+            "name": "Lunch Break",
+            "location": "6 Ballygunge Place",
+            "description": "Authentic Bengali cuisine near the museum.",
+            "image": "https://img.eurobike.at/w_342,h_213,q_80,v_01c87e,hash_04d6ce/ddcijcnkv/image/upload/v1714049979/eurobike/touren/familienreisen/at-sba-zehn-seen-fuer-familien-7-tage/NEU/eurobike-radreisen-zehn-seen-rundfahrt-wiener-schnitzel.jpg"
           },
           {
-            "time": "5:00 PM",
-            "name": "Travel back to North Goa",
-            "location": "Anjuna/Vagator",
-            "description": "Travel back"
+            "time": "2:00 PM",
+            "name": "Botanical Garden Visit",
+            "location": "Acharya Jagadish Chandra Bose Indian Botanic Garden",
+            "description": "Diverse plant life, serene after temple visit.",
+            "image": "https://cdn-ilaophb.nitrocdn.com/FqiyjqfYwjRUUjlecVMwXnmYKMoZhbow/assets/images/optimized/rev-8a8ee81/caramoor.org/wp-content/uploads/2021/03/f6a84fde23249643043fcf14566070b8.visit-page-351x.jpg"
           },
           {
-            "time": "7:30 PM",
-            "name": "Dinner at Curlies",
-            "location": "Anjuna",
-            "description": "Authentic goan cuisines."
+            "time": "4:00 PM",
+            "name": "Tea Time",
+            "location": "Brown County",
+            "description": "Located nearby botanical Garden, good view.",
+            "image": "https://www.bebevoyage.com/wp-content/uploads/2020/08/mom-and-baby-wearing-bib-300x300-optimized.jpg"
           },
           {
-            "time": "9:00 PM",
-            "name": "Live music at For the Record",
-            "location": "Anjuna",
-            "description": "Good music and friendly vibes."
-          }
-        ]
-      },
-      {
-        "day": 4,
-        "title": "Arambol Beach - Final Relaxation & Departure",
-        "narrative": "Focus solely on Arambol on the last day to ensure a relaxed departure.",
-        "activities": [
-          {
-            "time": "9:00 AM",
-            "name": "Breakfast at German Bakery",
-            "location": "Arambol",
-            "description": "German bakery view."
+            "time": "6:30 PM",
+            "name": "Family Dinner",
+            "location": "Manthan Chinese",
+            "description": "Dinner before the evening park",
+            "image": "https://cf.geekdo-images.com/Gow8rSx_TnrzXeIh19PgrA__itemrep/img/IcDpGdipHnAuAdKzGISqtFWIk8I=/fit-in/246x300/filters:strip_icc()/pic8332045.png"
           },
           {
-            "time": "10:00 AM",
-            "name": "Arambol Beach Relaxation",
-            "location": "Arambol Beach",
-            "description": "Beach chilling."
-          },
-          {
-            "time": "1:00 PM",
-            "name": "Lunch at Local Shack",
-            "location": "Arambol Beach",
-            "description": "Beach shack lunch."
-          },
-          {
-            "time": "3:00 PM",
-            "name": "Sweet Lake walk",
-            "location": "Sweet Lake",
-            "description": "Freshwater."
-          },
-          {
-            "time": "5:00 PM",
-            "name": "Arambol Sunset",
-            "location": "Arambol Beach",
-            "description": "Final sunset."
-          },
-          {
-            "time": "7:30 PM",
-            "name": "Dinner in Arambol",
-            "location": "Arambol Market",
-            "description": "final dinner"
-          },
-          {
-            "time": "9:00 PM",
-            "name": "Departure",
-            "location": "Thivim Railway Station/Dabolim Airport",
-            "description": "Go home"
+            "time": "8:00 PM",
+            "name": "Eco Tourism Park Relaxation",
+            "location": "Eco Tourism Park",
+            "description": "Evening stroll, enjoy the light shows.",
+            "image": "https://www.andeantrails.co.uk/nitropack_static/iwfVQrUWbgdNPzhPfPdurFCwDZQSldCZ/assets/images/optimized/rev-38b0105/www.andeantrails.co.uk/wp-content/uploads/2017/02/iguazu-from-air-argentina-300x226.jpg"
           }
         ]
       }
-    ]
+    ],
+    "agent_response": "Added museum visit and suggested nearby lunch."
   }
 }
