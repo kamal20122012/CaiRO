@@ -1,5 +1,48 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './CityAutocomplete.css';
+import './CityAutoComplete.css';
+
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
+let googleMapsPromise: Promise<void> | null = null;
+
+const loadGoogleMapsScript = (apiKey: string) => {
+  if (!googleMapsPromise) {
+    googleMapsPromise = new Promise((resolve, reject) => {
+      if (window.google && window.google.maps) {
+        return resolve();
+      }
+
+      const scriptId = 'google-maps-script';
+      if (document.getElementById(scriptId)) {
+        // If script is already in the DOM, just wait for the promise to resolve
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.id = scriptId;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&loading=async`;
+      script.onload = () => resolve();
+      script.onerror = () => {
+        googleMapsPromise = null; // Allow retrying
+        reject(new Error('Failed to load Google Maps API'));
+      };
+
+      document.head.appendChild(script);
+    });
+  }
+  return googleMapsPromise;
+};
+
+// Define Google Places types
+declare global {
+  interface Window {
+    google: any;
+  }
+}
 
 interface CityAutocompleteProps {
   value: string;
@@ -8,6 +51,15 @@ interface CityAutocompleteProps {
   placeholder: string;
   label: string;
   id: string;
+}
+
+// Define the type for a single suggestion
+interface AutocompleteSuggestion {
+  placePrediction: {
+    text: {
+      text: string;
+    };
+  };
 }
 
 export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
@@ -20,9 +72,27 @@ export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
 }) => {
   const [suggestions, setSuggestions] = useState<string[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isGoogleLoaded, setIsGoogleLoaded] = useState(false);
+  const [sessionToken, setSessionToken] = useState<any | undefined>(undefined);
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const debounceTimer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    const apiKey = "AIzaSyD51XwFtTeI724p8W_HWojrv4nxLb9DyiA";
+    if (!apiKey) {
+      console.error('Google Places API key not found.');
+      return;
+    }
+
+    let isMounted = true;
+    loadGoogleMapsScript(apiKey)
+      .then(() => {
+        if (isMounted) {
+          setIsGoogleLoaded(true);
+        }
+      })
+      .catch((error) => console.error(error));
+
     // Close suggestions on click outside
     const handleClickOutside = (event: MouseEvent) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
@@ -31,24 +101,44 @@ export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
     };
 
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    return () => {
+      isMounted = false;
+      document.removeEventListener('mousedown', handleClickOutside);
+      // Clean up debounce timer
+      if (debounceTimer.current) {
+        clearTimeout(debounceTimer.current);
+      }
+    };
   }, []);
 
   const fetchCitySuggestions = async (query: string) => {
-    if (!query.trim()) {
+    if (!query.trim() || !isGoogleLoaded) {
       setSuggestions([]);
       return;
     }
 
+    const request = {
+      input: query,
+      sessionToken: sessionToken,
+      includedPrimaryTypes: ['(cities)'],
+    };
+
     try {
-      const response = await fetch(`https://api.teleport.org/api/cities/?search=${encodeURIComponent(query)}&limit=5`);
-      const data = await response.json();
-      const cityNames = data._embedded['city:search-results']
-        .map((result: any) => result.matching_full_name)
-        .slice(0, 5);
-      setSuggestions(cityNames);
+      const { suggestions } =
+        await window.google.maps.places.AutocompleteSuggestion.fetchAutocompleteSuggestions(
+          request
+        );
+
+      if (suggestions) {
+        const cityNames = suggestions.map((suggestion: AutocompleteSuggestion) => {
+          return suggestion.placePrediction.text.text;
+        });
+        setSuggestions(cityNames.slice(0, 5));
+      } else {
+        setSuggestions([]);
+      }
     } catch (error) {
-      console.error('Error fetching city suggestions:', error);
+      console.error("Error fetching city suggestions:", error);
       setSuggestions([]);
     }
   };
@@ -56,13 +146,27 @@ export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     onChange(value);
-    fetchCitySuggestions(value);
-    setShowSuggestions(true);
+    
+    if (!sessionToken && window.google) {
+      setSessionToken(new window.google.maps.places.AutocompleteSessionToken());
+    }
+    
+    // Clear previous debounce timer
+    if (debounceTimer.current) {
+      clearTimeout(debounceTimer.current);
+    }
+    
+    // Debounce the API call to avoid too many requests
+    debounceTimer.current = setTimeout(async () => {
+      await fetchCitySuggestions(value);
+      setShowSuggestions(true);
+    }, 300);
   };
 
   const handleSuggestionClick = (suggestion: string) => {
     onSelect(suggestion);
     setShowSuggestions(false);
+    setSessionToken(undefined); // End session on selection
   };
 
   return (

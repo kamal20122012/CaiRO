@@ -1,6 +1,30 @@
-# React + TypeScript + Vite
+# CaiRO Travel Planner - Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the React frontend for the CaiRO Travel Planner application, built with TypeScript and Vite.
+
+## Setup
+
+### Google Places API Configuration
+
+The city autocomplete feature uses Google Places API with the modern JavaScript SDK approach. To set it up:
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/)
+2. Create a new project or select an existing one
+3. Enable the "Places API" for your project
+4. Create credentials (API Key) for the Places API
+5. Create a `.env` file in the client directory with:
+   ```
+   REACT_APP_GOOGLE_PLACES_API_KEY=your_google_places_api_key_here
+   ```
+
+**Note**: This implementation uses the traditional callback-based approach with `AutocompleteService` for maximum compatibility and stability.
+
+### Installation
+
+```bash
+npm install
+npm run dev
+```
 
 Currently, two official plugins are available:
 
