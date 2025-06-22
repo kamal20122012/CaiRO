@@ -818,21 +818,33 @@ def process_single_activity_image(activity: dict, api_key: str, cse_id: str, des
         return activity, 'failed'
 
 
-def add_images_to_activities(itinerary_json: str, destination: str = "", api_key: str = "AIzaSyA1Grg9lYjY2xa-ksP_d1VdSli3B_9LCLM", cse_id: str = "3788ce9cca864429b", use_fallback: bool = True, max_workers: int = 5) -> str:
+def add_images_to_activities(itinerary_json: str, destination: str = "", api_key: str = None, cse_id: str = None, use_fallback: bool = True, max_workers: int = 5) -> str:
     """
     Add image URLs to activities in the itinerary JSON using parallel processing.
     
     Args:
         itinerary_json (str): JSON string of the itinerary
         destination (str): Destination/city name to include in search queries for more specific results
-        api_key (str): Google API key for Custom Search
-        cse_id (str): Custom Search Engine ID
+        api_key (str): Google API key for Custom Search (if None, will use environment variable)
+        cse_id (str): Custom Search Engine ID (if None, will use environment variable)
         use_fallback (bool): Whether to use fallback images when no verified image is found
         max_workers (int): Maximum number of parallel threads (default: 5)
         
     Returns:
         str: Updated itinerary JSON with image URLs
     """
+    
+    # Get API credentials from environment if not provided
+    if api_key is None:
+        api_key = os.getenv("GOOGLE_CSE_API_KEY")
+    if cse_id is None:
+        cse_id = os.getenv("GOOGLE_CSE_ID")
+    
+    # Validate required credentials
+    if not api_key or not cse_id:
+        logging.warning(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}⚠️ Google Custom Search credentials not available. Skipping image processing.{Colors.RESET}")
+        logging.warning(f"{Colors.ITINERARY_PREFIX} {Colors.YELLOW}   Please set GOOGLE_CSE_API_KEY and GOOGLE_CSE_ID environment variables{Colors.RESET}")
+        return itinerary_json
     
     logging.info(f"{Colors.ITINERARY_PREFIX} {Colors.CYAN}🖼️ Starting parallel image processing for activities{Colors.RESET}")
     if destination:

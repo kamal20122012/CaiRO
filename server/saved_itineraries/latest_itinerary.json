@@ -1,19 +1,18 @@
 {
   "metadata": {
-    "destination": "kolkata",
-    "source": "ahmedabad",
-    "departure_date": "2025-06-25",
-    "arrival_date": "2025-06-27",
-    "days": 2,
-    "trip_theme": "quiet and calm",
+    "destination": "Mumbai, Maharashtra, India",
+    "source": "Delhi, India",
+    "departure_date": "2025-06-23",
+    "arrival_date": "2025-06-24",
+    "days": 1,
+    "trip_theme": "La tomatini",
     "user_mood": "exploratory",
     "vibe_keywords": [
-      "quiet",
-      "calm"
+      "tomatini"
     ],
     "activities": [
-      "Historical sites",
-      "Tea/coffee rituals"
+      "Bustling Markets",
+      "Bollywood Tours"
     ],
     "avoid": [
       "crowds",
@@ -22,122 +21,72 @@
     "been_here_before": false
   },
   "itinerary": {
-    "title": "Kolkata Calm Explorations: Optimized Family Itinerary",
-    "overview": "Efficient route, historical sites, family-friendly fun.",
+    "title": "Mumbai Market & Bollywood Route",
+    "overview": "Optimize market, Bollywood, local experience.",
     "days": [
       {
         "day": 1,
-        "title": "Central Kolkata History and Greenery",
-        "narrative": "Explore central area attractions efficiently.",
+        "title": "Colaba, Crawford & Bollywood Buzz",
+        "narrative": "Optimize route for market, film.",
         "activities": [
           {
-            "time": "8:00 AM",
-            "name": "Family Breakfast",
-            "location": "The Anchorage Bar - The Floatel Hotel",
-            "description": "Nearby Victoria Memorial, scenic views.",
-            "image": "https://brunchit.es/wp-content/uploads/2024/09/hotcakes-invernales-240x300-optimized.jpeg"
+            "time": "9:00 AM",
+            "name": "Crawford Market Exploration",
+            "location": "Crawford Market",
+            "description": "Start day amidst market bustle.",
+            "image": "https://www.defenseadvancement.com/wp-content/uploads/2023/04/Tristan-Crawford-and-Emmanuel-Pasqualini-AERALIS-and-SDTS-225x300.jpeg"
           },
           {
-            "time": "9:30 AM",
-            "name": "Victoria Memorial Exploration",
-            "location": "Victoria Memorial Hall",
-            "description": "Explore colonial history, beautiful architecture.",
-            "image": "https://i.etsystatic.com/36983037/r/il/cff85d/5881758838/il_300x300.5881758838_ewis.jpg"
+            "time": "10:30 AM",
+            "name": "Crawford Breakfast",
+            "location": "Crawford Market",
+            "description": "Street food inside or nearby. Try vada pav or pav bhaji.",
+            "image": "http://ranney-crawford.com/images/RanneyCrawfordSpring.jpg"
           },
           {
-            "time": "12:30 PM",
-            "name": "Lunch Break",
-            "location": "BLU - Bistro And Bar",
-            "description": "Conveniently located, family-friendly options.",
-            "image": "https://img.eurobike.at/w_342,h_213,q_80,v_01c87e,hash_04d6ce/ddcijcnkv/image/upload/v1714049979/eurobike/touren/familienreisen/at-sba-zehn-seen-fuer-familien-7-tage/NEU/eurobike-radreisen-zehn-seen-rundfahrt-wiener-schnitzel.jpg"
+            "time": "1:00 PM",
+            "name": "Film City Tour",
+            "location": "Film City",
+            "description": "Pre-booked tour, travel by local.",
+            "image": "https://www.pelago.com/img/products/IN-India/full-day-ramoji-film-city-tour-with-lunch-and-transfers/99f3ed0d-f95b-43d4-b06e-5a656ae3ec0a_full-day-ramoji-film-city-tour-with-lunch-and-transfers-small.webp"
           },
           {
-            "time": "2:00 PM",
-            "name": "Indian Museum Discovery",
-            "location": "Indian Museum",
-            "description": "Explore diverse artifacts, interactive exhibits.",
-            "image": "https://assets.simpleviewinc.com/simpleview/image/upload/c_fill,h_200,q_75,w_300/v1/clients/newyorkstate/Antique_Boat_Museum_Boat_Rides_25aebb86-025d-4325-9f4d-d027d6a0ae8b.jpg"
+            "time": "3:30 PM",
+            "name": "Film City Food Stop",
+            "location": "Film City Area",
+            "description": "Quick bite of local Maharashtrian snacks like Misal Pav outside Film City.",
+            "image": "https://upload.wikimedia.org/wikipedia/en/6/6a/Super_Size_Me_Poster.jpg"
           },
           {
             "time": "4:00 PM",
-            "name": "Tea and Snacks",
-            "location": "Cheers - The Astor Hotel",
-            "description": "Relaxing tea, near Maidan.",
-            "image": "https://dishingoutplants.com/wp-content/uploads/2024/07/jackfruit-curry-1200-x-1200-Alex-did-optimized-300x300.jpg"
+            "name": "Colaba Causeway Exploration",
+            "location": "Colaba Causeway",
+            "description": "Street shopping after travel.",
+            "image": "https://www.oberoihotels.com/-/media/oberoi-hotels/website-images/the-oberoi-mumbai/destination/thumbnail/colaba-marke.jpg?w=362&hash=12dd3eef2a698a1d83c344b6b74fe2b7"
           },
           {
-            "time": "6:30 PM",
-            "name": "Family Dinner",
-            "location": "Ego Retro Lounge - The Peerless Inn",
-            "description": "Comfortable setting, good selection.",
-            "image": "https://cf.geekdo-images.com/Gow8rSx_TnrzXeIh19PgrA__itemrep/img/IcDpGdipHnAuAdKzGISqtFWIk8I=/fit-in/246x300/filters:strip_icc()/pic8332045.png"
+            "time": "5:30 PM",
+            "name": "Cafe Stop, Social Interaction",
+            "location": "Colaba Area",
+            "description": "Irani cafe/local spot. Try bun maska and chai.",
+            "image": "https://images.stockcake.com/public/e/4/6/e462056d-0e82-4159-a59e-aa128924be12_medium/cafeteria-social-interaction-stockcake.jpg"
           },
           {
-            "time": "8:00 PM",
-            "name": "Maidan Relaxation",
-            "location": "Maidan",
-            "description": "Evening stroll, open space, calm.",
-            "image": "https://content.jdmagicbox.com/comp/warangal/j1/9999px870.x870.231221161337.n7j1/catalogue/jk-pride-family-restaurant-and-bar-hanamkonda-warangal-restaurants-5v3ff51tye-250.jpg"
-          }
-        ]
-      },
-      {
-        "day": 2,
-        "title": "Northern Kolkata Temples and Gardens",
-        "narrative": "North Kolkata, cultural and natural sites.",
-        "activities": [
-          {
-            "time": "8:00 AM",
-            "name": "Family Breakfast",
-            "location": "Raize The Bar",
-            "description": "Set breakfast before exploring northern sites",
-            "image": "https://brunchit.es/wp-content/uploads/2024/09/hotcakes-invernales-240x300-optimized.jpeg"
+            "time": "7:30 PM",
+            "name": "Colaba Dinner",
+            "location": "Colaba",
+            "description": "Find a budget-friendly local place. Look for seafood options.",
+            "image": "https://stat5.bollywoodhungama.in/wp-content/uploads/2018/06/Priyanka-Chopra-Nick-Jonas-and-Madhu-Chopra-snapped-for-dinner-in-Taj-colaba-1-346x260.jpg"
           },
           {
-            "time": "9:30 AM",
-            "name": "Gurusaday Museum Visit",
-            "location": "Gurusaday Museum",
-            "description": "Explore rural arts and crafts of Bengal.",
-            "image": "https://imgv2-1-f.scribdassets.com/img/document/743218547/149x198/2a092b5ef3/1718734776?v=1"
-          },
-          {
-            "time": "12:30 PM",
-            "name": "Lunch Break",
-            "location": "6 Ballygunge Place",
-            "description": "Authentic Bengali cuisine near the museum.",
-            "image": "https://img.eurobike.at/w_342,h_213,q_80,v_01c87e,hash_04d6ce/ddcijcnkv/image/upload/v1714049979/eurobike/touren/familienreisen/at-sba-zehn-seen-fuer-familien-7-tage/NEU/eurobike-radreisen-zehn-seen-rundfahrt-wiener-schnitzel.jpg"
-          },
-          {
-            "time": "2:00 PM",
-            "name": "Botanical Garden Visit",
-            "location": "Acharya Jagadish Chandra Bose Indian Botanic Garden",
-            "description": "Diverse plant life, serene after temple visit.",
-            "image": "https://cdn-ilaophb.nitrocdn.com/FqiyjqfYwjRUUjlecVMwXnmYKMoZhbow/assets/images/optimized/rev-8a8ee81/caramoor.org/wp-content/uploads/2021/03/f6a84fde23249643043fcf14566070b8.visit-page-351x.jpg"
-          },
-          {
-            "time": "4:00 PM",
-            "name": "Tea Time",
-            "location": "Brown County",
-            "description": "Located nearby botanical Garden, good view.",
-            "image": "https://www.bebevoyage.com/wp-content/uploads/2020/08/mom-and-baby-wearing-bib-300x300-optimized.jpg"
-          },
-          {
-            "time": "6:30 PM",
-            "name": "Family Dinner",
-            "location": "Manthan Chinese",
-            "description": "Dinner before the evening park",
-            "image": "https://cf.geekdo-images.com/Gow8rSx_TnrzXeIh19PgrA__itemrep/img/IcDpGdipHnAuAdKzGISqtFWIk8I=/fit-in/246x300/filters:strip_icc()/pic8332045.png"
-          },
-          {
-            "time": "8:00 PM",
-            "name": "Eco Tourism Park Relaxation",
-            "location": "Eco Tourism Park",
-            "description": "Evening stroll, enjoy the light shows.",
-            "image": "https://www.andeantrails.co.uk/nitropack_static/iwfVQrUWbgdNPzhPfPdurFCwDZQSldCZ/assets/images/optimized/rev-38b0105/www.andeantrails.co.uk/wp-content/uploads/2017/02/iguazu-from-air-argentina-300x226.jpg"
+            "time": "9:00 PM",
+            "name": "Colaba Nightlife",
+            "location": "Colaba",
+            "description": "Enjoy budget-friendly social scene.",
+            "image": "https://pix10.agoda.net/property/1482435/0/ac0b28f04a8ca8e0be46560aa7d31773.jpeg?s=414x232"
           }
         ]
       }
-    ],
-    "agent_response": "Added museum visit and suggested nearby lunch."
+    ]
   }
 }

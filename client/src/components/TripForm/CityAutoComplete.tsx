@@ -78,9 +78,9 @@ export const CityAutocomplete: React.FC<CityAutocompleteProps> = ({
   const debounceTimer = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
-    const apiKey = "AIzaSyD51XwFtTeI724p8W_HWojrv4nxLb9DyiA";
+    const apiKey = import.meta.env.VITE_GOOGLE_PLACES_API_KEY;
     if (!apiKey) {
-      console.error('Google Places API key not found.');
+      console.error('Google Places API key not found. Please set VITE_GOOGLE_PLACES_API_KEY environment variable.');
       return;
     }
 
