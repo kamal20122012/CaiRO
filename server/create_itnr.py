@@ -818,7 +818,7 @@ def process_single_activity_image(activity: dict, api_key: str, cse_id: str, des
         return activity, 'failed'
 
 
-def add_images_to_activities(itinerary_json: str, destination: str = "", api_key: str = None, cse_id: str = None, use_fallback: bool = True, max_workers: int = 5) -> str:
+def add_images_to_activities(itinerary_json: str, destination: str = "", api_key: str = "", cse_id: str = "", use_fallback: bool = True, max_workers: int = 5) -> str:
     """
     Add image URLs to activities in the itinerary JSON using parallel processing.
     
@@ -835,9 +835,9 @@ def add_images_to_activities(itinerary_json: str, destination: str = "", api_key
     """
     
     # Get API credentials from environment if not provided
-    if api_key is None:
+    if api_key=="":
         api_key = os.getenv("GOOGLE_CSE_API_KEY")
-    if cse_id is None:
+    if cse_id=="":
         cse_id = os.getenv("GOOGLE_CSE_ID")
     
     # Validate required credentials
