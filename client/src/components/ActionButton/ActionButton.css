@@ -53,10 +53,10 @@
   background: rgba(236, 72, 153, 0.1);
 }
 
-.action-button--tertiary {
-  background: rgba(45, 212, 191, 0.1);
-}
-
-.action-button--quaternary {
-  background: rgba(234, 179, 8, 0.1);
+.action-button--back{
+  background: rgba(45, 212, 190, 0.253);
+  padding: 1rem;
+  border-radius: 40px;
+  min-height: 70px;
+  width: 200px;
 }

@@ -41,7 +41,7 @@ export const ItineraryPage: React.FC = () => {
             label="Back to Planner"
             icon="←"
             onClick={() => navigate('/plan-trip')}
-            variant="secondary"
+            variant="back"
           />
         </div>
       </div>
@@ -55,7 +55,7 @@ export const ItineraryPage: React.FC = () => {
         label="Back to Planner"
         icon="←"
         onClick={() => navigate('/plan-trip')}
-        variant="secondary"
+        variant="back"
       />
       <h1 className="itinerary-page__title">Your Travel Plan</h1>
       <p className="itinerary-page__overview">

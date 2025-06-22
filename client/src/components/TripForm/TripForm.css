@@ -113,9 +113,8 @@
 
 .trip-form__activities {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  padding: 0.5rem;
 }
 
 
@@ -276,12 +275,6 @@
   font-family: monospace;
   font-size: 0.9rem;
   line-height: 1.5;
-}
-
-/* Been here before checkbox specific styling */
-.trip-form__field .trip-form__checkbox-label:last-child {
-  width: fit-content;
-  margin-top: 0.5rem;
 }
 
 /* Animations */

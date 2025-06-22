@@ -31,18 +31,6 @@ export const TravelPlanner: React.FC = () => {
             onClick={() => handleAction('view-memories')}
             variant="secondary"
           />
-          <ActionButton
-            label="Discover Places"
-            icon="✧"
-            onClick={() => handleAction('get-suggestions')}
-            variant="tertiary"
-          />
-          <ActionButton
-            label="Your Stories"
-            icon="✧"
-            onClick={() => handleAction('view-itineraries')}
-            variant="quaternary"
-          />
         </div>
       </div>
     </div>

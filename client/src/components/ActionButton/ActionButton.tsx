@@ -5,7 +5,7 @@ export interface ActionButtonProps {
   label: string;
   icon: string;
   onClick: () => void;
-  variant: 'primary' | 'secondary' | 'tertiary' | 'quaternary';
+  variant: 'primary' | 'secondary' | 'tertiary' | 'quaternary' | 'back';
   disabled?: boolean;
 }
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ActionButton } from '@/components/ActionButton/ActionButton';
 import { TripFormData, TripFormOutput } from '@/types/components/TripForm';
+import { CityAutocomplete } from '@/components/TripForm/CityAutoComplete';
 import './TripForm.css';
 
 const ACTIVITIES = [
@@ -91,7 +92,7 @@ export const TripForm: React.FC = () => {
     const start = new Date(startDate);
     const end = new Date(endDate);
     const diffTime = Math.abs(end.getTime() - start.getTime());
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // +1 to include both start and end days
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   };
 
   const extractMood = (vibe: string): string => {
@@ -126,27 +127,25 @@ export const TripForm: React.FC = () => {
           />
         </div>
 
-        <div className="trip-form__source">
-          <label htmlFor="source">Where are you traveling from?</label>
-          <input
-            type="text"
+        <div className="trip-form__field">
+          <CityAutocomplete
             id="source"
+            label="Where are you traveling from?"
             value={formData.source}
-            onChange={(e) => setFormData(prev => ({ ...prev, source: e.target.value }))}
+            onChange={(value) => setFormData(prev => ({ ...prev, source: value }))}
+            onSelect={(city) => setFormData(prev => ({ ...prev, source: city }))}
             placeholder="Enter your starting point"
-            className="trip-form__input"
           />
         </div>
 
         <div className="trip-form__field">
-          <label htmlFor="destination">Where would you like to go?</label>
-          <input
-            type="text"
+          <CityAutocomplete
             id="destination"
+            label="Where would you like to go?"
             value={formData.destination}
-            onChange={(e) => setFormData(prev => ({ ...prev, destination: e.target.value }))}
+            onChange={(value) => setFormData(prev => ({ ...prev, destination: value }))}
+            onSelect={(city) => setFormData(prev => ({ ...prev, destination: city }))}
             placeholder="Enter destination"
-            className="trip-form__input"
           />
         </div>
 
@@ -194,6 +193,7 @@ export const TripForm: React.FC = () => {
             ))}
           </div>
         </div>
+
 
         <div className="trip-form__field">
           <label className="trip-form__checkbox-label">
